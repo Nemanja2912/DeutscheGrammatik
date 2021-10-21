@@ -1,0 +1,301 @@
+// Import FONT
+@font-face {
+  font-family: Goethe;
+  src: url(../assets/font/GoetheGothic.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Goethe;
+  src: url(../assets/font/GoetheGothicBold.ttf);
+  font-weight: 700;
+}
+
+// Variable
+$BACKGROUND_COLOR: #fff;
+$GREEN_COLOR: #a0c814;
+$BROW_COLOR: #374105;
+$GRAY_COLOR: #788287;
+
+// General
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Goethe;
+  box-sizing: border-box;
+}
+
+// Menu
+.menu {
+  background-color: $GREEN_COLOR;
+  height: 100vh;
+  width: 100vw;
+  padding-left: 5vw;
+  position: relative;
+  transition: 1s;
+
+  .top {
+    padding-top: 15vh;
+    transition: 1s;
+
+    p {
+      font-size: 35px;
+      font-weight: 700;
+      text-transform: uppercase;
+      transition: 1s;
+    }
+  }
+
+  .title {
+    color: $BACKGROUND_COLOR;
+  }
+
+  .subtitle {
+    color: $BROW_COLOR;
+  }
+
+  .text {
+    color: $BACKGROUND_COLOR;
+    font-size: 25px;
+    margin-top: 20px;
+    font-weight: 700;
+    transition: 1s;
+  }
+
+  .button {
+    font-size: 25px;
+    background-color: $BACKGROUND_COLOR;
+    color: $GRAY_COLOR;
+    width: max-content;
+    font-weight: 700;
+    margin-top: 50px;
+    padding: 20px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    animation-name: buttonShow;
+    animation-duration: 1s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
+    transition: 0.5s;
+
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+    }
+  }
+
+  .info {
+    position: absolute;
+    top: 5vh;
+    right: 5vw;
+    color: $BACKGROUND_COLOR;
+    font-weight: 700;
+    font-size: 20px;
+    transition: 1s;
+  }
+
+  .info-small {
+    font-size: 12px;
+    top: 25px;
+    right: 15px;
+  }
+
+  .bottom {
+    position: absolute;
+    bottom: 5vh;
+    right: 5vw;
+    text-align: right;
+    transition: 1s;
+
+    p {
+      font-weight: 700;
+      color: $BROW_COLOR;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    p:first-child {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.bottomHide {
+  opacity: 0;
+}
+
+.move {
+  padding-top: 1vh !important;
+
+  p {
+    font-size: 20px !important;
+  }
+
+  .title {
+    opacity: 0;
+  }
+}
+
+.move2 {
+  padding-top: 0px !important;
+  //   margin-top: -15px !important;
+
+  p {
+    font-size: 15px !important;
+  }
+}
+
+.hidden {
+  opacity: 0;
+
+  animation-name: hide;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-delay: 1s;
+}
+
+.buttonHidden {
+  display: none;
+}
+
+.next {
+  display: none;
+  opacity: 0;
+  margin-top: 0px;
+  animation-name: textAppear;
+  animation-duration: 1s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-delay: 1s;
+  transition: 1s;
+
+  .title {
+    font-size: 23px;
+    font-weight: 700;
+    transition: 1s;
+  }
+
+  .subtitle {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 20px;
+  }
+}
+
+.button2 {
+  opacity: 0;
+  font-size: 25px;
+  background-color: $BACKGROUND_COLOR;
+  color: $GRAY_COLOR;
+  width: max-content;
+  font-weight: 700;
+  margin-top: 50px;
+  padding: 20px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition: 0.5s;
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+  }
+}
+
+.buttonShow {
+  animation-name: buttonShow;
+  animation-duration: 1s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-delay: 2s;
+}
+
+.nextShow {
+  display: block;
+  margin-top: 100px;
+}
+
+.nextShow2 {
+  animation-name: textMoveBack;
+  animation-duration: 1s;
+  opacity: 1;
+  animation-fill-mode: forwards;
+  animation-delay: 0s;
+
+  .title {
+    font-size: 15px;
+  }
+
+  .subtitle {
+    display: none;
+  }
+}
+
+.menu-small {
+  height: 80px;
+}
+
+.arrow {
+  img {
+    width: 30px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 7px;
+    position: absolute;
+    cursor: pointer;
+    opacity: 0;
+    transition: 0.5s;
+    transition-delay: 1s;
+  }
+}
+
+.imageShow {
+  opacity: 1 !important;
+}
+
+@keyframes buttonShow {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  75% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes textAppear {
+  0% {
+    opacity: 0;
+    margin-top: 0px;
+  }
+
+  100% {
+    opacity: 1;
+    margin-top: 100px;
+  }
+}
+
+@keyframes textMoveBack {
+  0% {
+    margin-top: 100px;
+  }
+
+  100% {
+    margin-top: 5px;
+  }
+}
