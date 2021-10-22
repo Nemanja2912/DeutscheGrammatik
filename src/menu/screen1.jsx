@@ -11,8 +11,6 @@ const Screen1 = ({ movePos }) => {
     }
   });
 
-  let move2;
-
   return (
     <>
       <div
