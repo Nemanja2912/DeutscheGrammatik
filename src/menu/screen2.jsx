@@ -53,7 +53,7 @@ const Screen2 = ({ movePos, changePos, item, changeItem }) => {
             </div>
 
             <div
-              className={`title ${item === 1 ? "active" : ""}${
+              className={`title ${item === 1 ? "active" : ""} ${
                 movePos === 2 ? "titleReduce" : ""
               }`}
               style={{
@@ -72,7 +72,7 @@ const Screen2 = ({ movePos, changePos, item, changeItem }) => {
               2. POSITION DES VERBS FINDEN
             </div>
             <div
-              className={`title ${item === 2 ? "active" : ""}${
+              className={`title ${item === 2 ? "active" : ""} ${
                 movePos === 2 ? "titleReduce" : ""
               }`}
               style={{
@@ -91,7 +91,7 @@ const Screen2 = ({ movePos, changePos, item, changeItem }) => {
               3. REGEL FORMULIREN
             </div>
             <div
-              className={`title ${item === 3 ? "active" : ""}${
+              className={`title ${item === 3 ? "active" : ""} ${
                 movePos === 2 ? "titleReduce" : ""
               }`}
               style={{
@@ -110,7 +110,7 @@ const Screen2 = ({ movePos, changePos, item, changeItem }) => {
               4. Übung 1
             </div>
             <div
-              className={`title ${item === 4 ? "active" : ""}${
+              className={`title ${item === 4 ? "active" : ""} ${
                 movePos === 2 ? "titleReduce" : ""
               }`}
               style={{
