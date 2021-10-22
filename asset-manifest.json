@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/DeutscheGrammatik/static/css/main.f8f0d8c7.chunk.css",
-    "main.js": "/DeutscheGrammatik/static/js/main.0e304151.chunk.js",
-    "main.js.map": "/DeutscheGrammatik/static/js/main.0e304151.chunk.js.map",
+    "main.css": "/DeutscheGrammatik/static/css/main.afc1aac1.chunk.css",
+    "main.js": "/DeutscheGrammatik/static/js/main.b4231081.chunk.js",
+    "main.js.map": "/DeutscheGrammatik/static/js/main.b4231081.chunk.js.map",
     "runtime-main.js": "/DeutscheGrammatik/static/js/runtime-main.d20d72d7.js",
     "runtime-main.js.map": "/DeutscheGrammatik/static/js/runtime-main.d20d72d7.js.map",
-    "static/js/2.2ba972e1.chunk.js": "/DeutscheGrammatik/static/js/2.2ba972e1.chunk.js",
-    "static/js/2.2ba972e1.chunk.js.map": "/DeutscheGrammatik/static/js/2.2ba972e1.chunk.js.map",
+    "static/js/2.8cc709e3.chunk.js": "/DeutscheGrammatik/static/js/2.8cc709e3.chunk.js",
+    "static/js/2.8cc709e3.chunk.js.map": "/DeutscheGrammatik/static/js/2.8cc709e3.chunk.js.map",
     "index.html": "/DeutscheGrammatik/index.html",
-    "static/css/main.f8f0d8c7.chunk.css.map": "/DeutscheGrammatik/static/css/main.f8f0d8c7.chunk.css.map",
-    "static/js/2.2ba972e1.chunk.js.LICENSE.txt": "/DeutscheGrammatik/static/js/2.2ba972e1.chunk.js.LICENSE.txt",
+    "static/css/main.afc1aac1.chunk.css.map": "/DeutscheGrammatik/static/css/main.afc1aac1.chunk.css.map",
+    "static/js/2.8cc709e3.chunk.js.LICENSE.txt": "/DeutscheGrammatik/static/js/2.8cc709e3.chunk.js.LICENSE.txt",
     "static/media/style.css": "/DeutscheGrammatik/static/media/GoetheGothicBold.612e7d20.ttf",
     "static/media/arrow_down.e10072cb.svg": "/DeutscheGrammatik/static/media/arrow_down.e10072cb.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.d20d72d7.js",
-    "static/js/2.2ba972e1.chunk.js",
-    "static/css/main.f8f0d8c7.chunk.css",
-    "static/js/main.0e304151.chunk.js"
+    "static/js/2.8cc709e3.chunk.js",
+    "static/css/main.afc1aac1.chunk.css",
+    "static/js/main.b4231081.chunk.js"
   ]
 }
