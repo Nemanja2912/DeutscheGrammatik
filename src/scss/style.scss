@@ -25,6 +25,10 @@ $GRAY_COLOR: #788287;
   box-sizing: border-box;
 }
 
+body {
+  overflow: hidden;
+}
+
 // Menu
 .menu {
   background-color: $GREEN_COLOR;
@@ -48,10 +52,13 @@ $GRAY_COLOR: #788287;
 
   .title {
     color: $BACKGROUND_COLOR;
+    cursor: pointer;
+    width: max-content;
   }
 
   .subtitle {
     color: $BROW_COLOR;
+    text-transform: uppercase;
   }
 
   .text {
@@ -106,7 +113,8 @@ $GRAY_COLOR: #788287;
     bottom: 5vh;
     right: 5vw;
     text-align: right;
-    transition: 1s;
+    transition: 0.5s;
+    transition-delay: 0.2s;
 
     p {
       font-weight: 700;
@@ -116,13 +124,14 @@ $GRAY_COLOR: #788287;
     }
 
     p:first-child {
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
   }
 }
 
 .bottomHide {
   opacity: 0;
+  transition-delay: 0s !important;
 }
 
 .move {
@@ -161,14 +170,9 @@ $GRAY_COLOR: #788287;
 
 .next {
   display: none;
-  opacity: 0;
   margin-top: 0px;
-  animation-name: textAppear;
-  animation-duration: 1s;
-  opacity: 0;
-  animation-fill-mode: forwards;
-  animation-delay: 1s;
   transition: 1s;
+  opacity: 0;
 
   .title {
     font-size: 23px;
@@ -206,25 +210,17 @@ $GRAY_COLOR: #788287;
   }
 }
 
-.buttonShow {
-  animation-name: buttonShow;
-  animation-duration: 1s;
-  opacity: 0;
-  animation-fill-mode: forwards;
-  animation-delay: 2s;
-}
-
 .nextShow {
   display: block;
-  margin-top: 100px;
+  animation-name: textAppear;
+  animation-duration: 1s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
 }
 
 .nextShow2 {
-  animation-name: textMoveBack;
-  animation-duration: 1s;
+  display: block;
   opacity: 1;
-  animation-fill-mode: forwards;
-  animation-delay: 0s;
 
   .title {
     font-size: 15px;
@@ -235,8 +231,53 @@ $GRAY_COLOR: #788287;
   }
 }
 
+.nextAnimation {
+  margin-top: 100px;
+  animation-name: textMoveBack;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.nextShow3 {
+  display: block;
+  opacity: 1;
+  margin-top: 5px !important;
+  .title {
+    font-size: 15px;
+    opacity: 0;
+    transition: 1s;
+    animation-name: fontIncrease;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+  }
+
+  .active {
+    opacity: 1 !important;
+  }
+
+  .subtitle {
+    display: none;
+  }
+}
+
+.titleReduce {
+  font-size: 20px;
+  opacity: 0.7;
+  animation-name: fontDecrease;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.active {
+  opacity: 1 !important;
+}
+
 .menu-small {
   height: 80px;
+}
+
+.menu-medium {
+  height: 30vh;
 }
 
 .arrow {
@@ -256,6 +297,28 @@ $GRAY_COLOR: #788287;
 
 .imageShow {
   opacity: 1 !important;
+}
+
+@keyframes fontIncrease {
+  0% {
+    font-size: 15px;
+    opacity: 0;
+  }
+  100% {
+    font-size: 20px;
+    opacity: 0.7;
+  }
+}
+
+@keyframes fontDecrease {
+  0% {
+    font-size: 20px;
+    opacity: 0.7;
+  }
+  100% {
+    font-size: 15px;
+    opacity: 0;
+  }
 }
 
 @keyframes buttonShow {

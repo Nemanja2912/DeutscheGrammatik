@@ -1,70 +1,85 @@
 import React, { useState } from "react";
+import { useEffect } from "react/cjs/react.development";
 import Arrow from "../assets/img/arrow_down.svg";
+import Screen1 from "./screen1";
+import Screen2 from "./screen2";
 
 const Menu = () => {
-  const [move, setMove] = useState(false);
-  const [move2, setMove2] = useState(false);
-  const [textNone, setTextNone] = useState(false);
-  const handleMove = () => {
-    setMove(true);
-    setTimeout(() => {
-      setTextNone(true);
-    }, 1000);
+  const [movePos, setMovePos] = useState(0);
+  const [buttonAnimation, setButtonAnimation] = useState(false);
+  const [navMenuItem, setNavMenuItem] = useState(0);
+
+  const increaseMovePos = () => {
+    console.log("tes");
+    if (movePos === 3) {
+      setMovePos(0);
+    } else {
+      setMovePos(movePos + 1);
+    }
+
+    setButtonAnimation(true);
   };
 
-  const handleMove2 = () => {
-    setMove2(true);
+  const setSpecificPos = (n) => {
+    setMovePos(n);
+  };
+
+  useEffect(() => {
+    if (movePos === 1) {
+      setTimeout(() => {
+        setButtonAnimation(false);
+      }, 1000);
+    }
+  }, [movePos]);
+
+  const handleOpenMenu = () => {
+    if (movePos === 2) {
+      setMovePos(3);
+    } else {
+      setMovePos(2);
+    }
   };
 
   return (
-    <div className={`menu ${move2 ? "menu-small" : ""}`}>
-      <div className={`top ${move ? "move" : ""} ${move2 ? "move2" : ""}`}>
-        <p className={`title`}>Interaktive Grammatik</p>
-        <p className="subtitle">Position des Verbs im Aussagesatz</p>
-      </div>
-      {textNone ? (
-        ""
-      ) : (
-        <p className={`text ${move ? "hidden" : ""}`}>
-          Wo steht das Verb im Aussagesatz? Dafür gibt es eine Regel.
-          <br />
-          Diese Regel kannst du in dieser Lektion lernen oder wiederholen.
-        </p>
+    <div
+      className={`menu ${
+        movePos === 2 ? "menu-small" : movePos === 3 ? "menu-medium" : ""
+      }`}
+      onClick={() => {
+        if (movePos === 2) handleOpenMenu();
+      }}
+    >
+      <Screen1 movePos={movePos} />
+      {movePos !== 0 && (
+        <Screen2
+          item={navMenuItem}
+          changeItem={(n) => setNavMenuItem(n)}
+          movePos={movePos}
+          changePos={setSpecificPos}
+        />
       )}
       <div
-        className={`next ${move ? "nextShow" : ""} ${move2 ? "nextShow2" : ""}`}
-      >
-        <div className="title">1. VERB MARKIEREN</div>
-        <div className="subtitle">WO STEHT DAS VERB?</div>
-        <p style={{ display: move2 ? "none" : "block" }}>
-          Hier arbeitest du mit Sätzen und markierst das Verb. Am Ende siehst du
-          eine Audio-Bilder-Geschichte.
-        </p>
-      </div>
-      <div
-        onClick={handleMove}
-        className={`button ${move ? "buttonHidden" : ""}`}
+        onClick={increaseMovePos}
+        className={`button ${buttonAnimation ? "buttonHidden" : ""}`}
       >
         WEITER
       </div>
       <div
-        onClick={handleMove2}
-        className={` button2 ${move ? "buttonShow" : ""}`}
-        style={{ display: move2 ? "none" : "block" }}
+        className={`info ${movePos === 1 || movePos === 2 ? "info-small" : ""}`}
       >
-        WEITER
-      </div>
-      <div className={`info ${move2 ? "info-small" : ""}`}>
         DEUTSCHE <br />
         GRAMMATIK
       </div>
-      <div className={`bottom ${move2 ? "bottomHide" : ""}`}>
+      <div className={`bottom ${movePos === 2 ? "bottomHide" : ""}`}>
         <p>Credits</p>
         <p>Impressum</p>
       </div>
-      <div className="arrow">
+      <div className="arrow" onClick={handleOpenMenu}>
         <img
-          className={`image ${move2 ? "imageShow" : ""}`}
+          className={`image ${
+            movePos === 2 || movePos === 3 ? "imageShow" : ""
+          }`}
+          style={{ transform: movePos === 3 ? "rotate(180deg)" : "rotate(0)" }}
           src={Arrow}
           alt=""
         />

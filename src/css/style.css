@@ -17,6 +17,10 @@
   box-sizing: border-box;
 }
 
+body {
+  overflow: hidden;
+}
+
 .menu {
   background-color: #a0c814;
   height: 100vh;
@@ -40,10 +44,13 @@
 
 .menu .title {
   color: #fff;
+  cursor: pointer;
+  width: max-content;
 }
 
 .menu .subtitle {
   color: #374105;
+  text-transform: uppercase;
 }
 
 .menu .text {
@@ -98,7 +105,8 @@
   bottom: 5vh;
   right: 5vw;
   text-align: right;
-  transition: 1s;
+  transition: 0.5s;
+  transition-delay: 0.2s;
 }
 
 .menu .bottom p {
@@ -109,11 +117,12 @@
 }
 
 .menu .bottom p:first-child {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .bottomHide {
   opacity: 0;
+  transition-delay: 0s !important;
 }
 
 .move {
@@ -150,14 +159,9 @@
 
 .next {
   display: none;
-  opacity: 0;
   margin-top: 0px;
-  animation-name: textAppear;
-  animation-duration: 1s;
-  opacity: 0;
-  animation-fill-mode: forwards;
-  animation-delay: 1s;
   transition: 1s;
+  opacity: 0;
 }
 
 .next .title {
@@ -195,25 +199,17 @@
   box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
 }
 
-.buttonShow {
-  animation-name: buttonShow;
-  animation-duration: 1s;
-  opacity: 0;
-  animation-fill-mode: forwards;
-  animation-delay: 2s;
-}
-
 .nextShow {
   display: block;
-  margin-top: 100px;
+  animation-name: textAppear;
+  animation-duration: 1s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
 }
 
 .nextShow2 {
-  animation-name: textMoveBack;
-  animation-duration: 1s;
+  display: block;
   opacity: 1;
-  animation-fill-mode: forwards;
-  animation-delay: 0s;
 }
 
 .nextShow2 .title {
@@ -224,8 +220,54 @@
   display: none;
 }
 
+.nextAnimation {
+  margin-top: 100px;
+  animation-name: textMoveBack;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.nextShow3 {
+  display: block;
+  opacity: 1;
+  margin-top: 5px !important;
+}
+
+.nextShow3 .title {
+  font-size: 15px;
+  opacity: 0;
+  transition: 1s;
+  animation-name: fontIncrease;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.nextShow3 .active {
+  opacity: 1 !important;
+}
+
+.nextShow3 .subtitle {
+  display: none;
+}
+
+.titleReduce {
+  font-size: 20px;
+  opacity: 0.7;
+  animation-name: fontDecrease;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.active {
+  opacity: 1 !important;
+}
+
 .menu-small {
   height: 80px;
+}
+
+.menu-medium {
+  height: 30vh;
 }
 
 .arrow img {
@@ -243,6 +285,28 @@
 
 .imageShow {
   opacity: 1 !important;
+}
+
+@keyframes fontIncrease {
+  0% {
+    font-size: 15px;
+    opacity: 0;
+  }
+  100% {
+    font-size: 20px;
+    opacity: 0.7;
+  }
+}
+
+@keyframes fontDecrease {
+  0% {
+    font-size: 20px;
+    opacity: 0.7;
+  }
+  100% {
+    font-size: 15px;
+    opacity: 0;
+  }
 }
 
 @keyframes buttonShow {
