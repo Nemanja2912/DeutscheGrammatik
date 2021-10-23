@@ -54,6 +54,7 @@ body {
     color: $BACKGROUND_COLOR;
     cursor: pointer;
     width: max-content;
+    text-transform: uppercase;
   }
 
   .subtitle {
@@ -100,12 +101,14 @@ body {
     font-weight: 700;
     font-size: 20px;
     transition: 1s;
+    line-height: 26px;
   }
 
   .info-small {
     font-size: 12px;
     top: 25px;
     right: 15px;
+    line-height: 18px;
   }
 
   .bottom {
@@ -227,7 +230,7 @@ body {
   }
 
   .subtitle {
-    display: none;
+    // display: none;
   }
 }
 
@@ -256,7 +259,7 @@ body {
   }
 
   .subtitle {
-    display: none;
+    // display: none;
   }
 }
 
@@ -361,4 +364,15 @@ body {
   100% {
     margin-top: 5px;
   }
+}
+
+.titles {
+  // border: 1px solid red;
+  overflow: hidden;
+  height: 27px;
+  transition: 1s;
+}
+
+.titles-full {
+  height: 150px;
 }

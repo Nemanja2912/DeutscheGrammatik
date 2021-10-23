@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import React, { useState, useEffect } from "react";
 import Arrow from "../assets/img/arrow_down.svg";
 import Screen1 from "./screen1";
 import Screen2 from "./screen2";

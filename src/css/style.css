@@ -46,6 +46,7 @@ body {
   color: #fff;
   cursor: pointer;
   width: max-content;
+  text-transform: uppercase;
 }
 
 .menu .subtitle {
@@ -92,12 +93,14 @@ body {
   font-weight: 700;
   font-size: 20px;
   transition: 1s;
+  line-height: 26px;
 }
 
 .menu .info-small {
   font-size: 12px;
   top: 25px;
   right: 15px;
+  line-height: 18px;
 }
 
 .menu .bottom {
@@ -216,10 +219,6 @@ body {
   font-size: 15px;
 }
 
-.nextShow2 .subtitle {
-  display: none;
-}
-
 .nextAnimation {
   margin-top: 100px;
   animation-name: textMoveBack;
@@ -244,10 +243,6 @@ body {
 
 .nextShow3 .active {
   opacity: 1 !important;
-}
-
-.nextShow3 .subtitle {
-  display: none;
 }
 
 .titleReduce {
@@ -344,5 +339,15 @@ body {
   100% {
     margin-top: 5px;
   }
+}
+
+.titles {
+  overflow: hidden;
+  height: 27px;
+  transition: 1s;
+}
+
+.titles-full {
+  height: 150px;
 }
 /*# sourceMappingURL=style.css.map */
