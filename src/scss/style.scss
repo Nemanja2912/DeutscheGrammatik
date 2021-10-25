@@ -23,6 +23,7 @@ $GRAY_COLOR: #788287;
   padding: 0;
   font-family: Goethe;
   box-sizing: border-box;
+  transition-timing-function: linear;
 }
 
 body {
@@ -55,11 +56,13 @@ body {
     cursor: pointer;
     width: max-content;
     text-transform: uppercase;
+    line-height: 60px;
   }
 
   .subtitle {
     color: $BROW_COLOR;
     text-transform: uppercase;
+    line-height: 20px;
   }
 
   .text {
@@ -95,7 +98,7 @@ body {
 
   .info {
     position: absolute;
-    top: 5vh;
+    top: 25px;
     right: 5vw;
     color: $BACKGROUND_COLOR;
     font-weight: 700;
@@ -113,7 +116,7 @@ body {
 
   .bottom {
     position: absolute;
-    bottom: 5vh;
+    bottom: 25px;
     right: 5vw;
     text-align: right;
     transition: 0.5s;
@@ -146,12 +149,17 @@ body {
 
   .title {
     opacity: 0;
+    line-height: 20px;
   }
 }
 
 .move2 {
   padding-top: 0px !important;
   //   margin-top: -15px !important;
+
+  .subtitle {
+    margin-top: 0px;
+  }
 
   p {
     font-size: 15px !important;
@@ -178,15 +186,17 @@ body {
   opacity: 0;
 
   .title {
-    font-size: 23px;
+    font-size: 20px;
     font-weight: 700;
     transition: 1s;
+    line-height: 28px;
   }
 
   .subtitle {
     font-size: 28px;
     font-weight: 700;
     margin-bottom: 10px;
+    margin-top: 15px;
   }
 
   p {
@@ -247,15 +257,11 @@ body {
   margin-top: 5px !important;
   .title {
     font-size: 15px;
-    opacity: 0;
     transition: 1s;
     animation-name: fontIncrease;
     animation-duration: 1s;
     animation-fill-mode: forwards;
-  }
-
-  .active {
-    opacity: 1 !important;
+    color: rgba(255, 255, 255, 0.712);
   }
 
   .subtitle {
@@ -265,7 +271,6 @@ body {
 
 .titleReduce {
   font-size: 20px;
-  opacity: 0.7;
   animation-name: fontDecrease;
   animation-duration: 1s;
   animation-fill-mode: forwards;
@@ -273,6 +278,7 @@ body {
 
 .active {
   opacity: 1 !important;
+  color: $BACKGROUND_COLOR !important;
 }
 
 .menu-small {
@@ -280,7 +286,7 @@ body {
 }
 
 .menu-medium {
-  height: 30vh;
+  height: 225px;
 }
 
 .arrow {
@@ -305,22 +311,18 @@ body {
 @keyframes fontIncrease {
   0% {
     font-size: 15px;
-    opacity: 0;
   }
   100% {
     font-size: 20px;
-    opacity: 0.7;
   }
 }
 
 @keyframes fontDecrease {
   0% {
     font-size: 20px;
-    opacity: 0.7;
   }
   100% {
     font-size: 15px;
-    opacity: 0;
   }
 }
 
@@ -369,8 +371,12 @@ body {
 .titles {
   // border: 1px solid red;
   overflow: hidden;
-  height: 27px;
+  height: 22px;
   transition: 1s;
+}
+
+.titles-small {
+  height: 20px;
 }
 
 .titles-full {

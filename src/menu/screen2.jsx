@@ -11,7 +11,7 @@ const Screen2 = ({ movePos, changePos, item, changeItem }) => {
   useEffect(() => {
     setTimeout(() => {
       setDisplay(true);
-    }, 750);
+    }, 1000);
   }, [display]);
 
   return (
@@ -24,7 +24,11 @@ const Screen2 = ({ movePos, changePos, item, changeItem }) => {
       >
         {display && (
           <>
-            <div className={`titles ${movePos === 3 ? "titles-full" : ""}`}>
+            <div
+              className={`titles ${movePos === 2 ? "titles-small" : ""} ${
+                movePos === 3 ? "titles-full" : ""
+              }`}
+            >
               <div
                 onClick={() => {
                   if (item === 0) return;
