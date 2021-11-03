@@ -1,0 +1,338 @@
+.game1 {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.game1 .content {
+  display: flex;
+  padding: 0 50px;
+}
+
+.game1 .content .error {
+  background-color: #eb6400;
+  padding: 10px;
+  width: 175px;
+  font-size: 14px;
+  line-height: 22px;
+  border-radius: 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  color: rgba(255, 255, 255, 0.719);
+  position: relative;
+  z-index: 10000;
+}
+
+.game1 .content .error:after {
+  content: "";
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  background-color: #eb6400;
+  top: -5px;
+  z-index: -1;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.game1 .content .shake {
+  animation-name: shaker;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  position: relative;
+  left: 0%;
+}
+
+@keyframes shaker {
+  0% {
+    left: -5px;
+  }
+  25% {
+    left: 5px;
+  }
+  50% {
+    left: -5px;
+  }
+  75% {
+    left: 5px;
+  }
+  100% {
+    left: 0%;
+  }
+}
+
+.game1 .content .checkmark img {
+  height: 150px;
+  background-color: #a0c814;
+  padding: 25px;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.game1 .content .zoom {
+  height: 200px !important;
+}
+
+.game1 .content .image {
+  width: 400px;
+  margin-right: 75px;
+  background-position: center;
+  background-size: cover;
+  transition: 1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game1 .content .image .play {
+  background-color: #a0c814;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation-name: buttonShow;
+  animation-duration: 1s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-delay: 1s;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.game1 .content .image .play img {
+  width: 35%;
+  margin-left: 5px;
+}
+
+.game1 .content .image .play:hover {
+  height: 115px;
+  width: 115px;
+}
+
+@keyframes buttonShow {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.game1 .content .text {
+  font-size: 22px;
+  line-height: 36px;
+  width: 50vw;
+}
+
+.game1 .content .text .text-group {
+  padding: 0 5px;
+  margin: 5px 0;
+  transition: 1s;
+  border-radius: 5px;
+  display: inline-block;
+  opacity: 0;
+  position: relative;
+  left: -100px;
+  cursor: default;
+}
+
+.game1 .content .text .show {
+  cursor: pointer;
+  opacity: 1;
+  left: 0;
+  z-index: 100;
+}
+
+.game1 .content .text .show:hover {
+  background-color: #dddddd;
+}
+
+.game1 .content .text .selected {
+  background-color: #a0c814;
+}
+
+.game1 .content .text .selected:hover {
+  background-color: #a0c814;
+}
+
+.game1 .content .text .disable:hover {
+  background-color: transparent !important;
+}
+
+.game1 .content .text .text-group1 {
+  padding: 0 5px;
+  margin: 5px 0;
+  cursor: pointer;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+
+.game1 .content .text .text-group1:hover {
+  background-color: #dddddd;
+}
+
+.game1 .images {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  margin: 75px 50px 0 50px;
+  grid-gap: 15px;
+}
+
+.game1 .images img {
+  width: 100%;
+}
+
+.game1 .media-box {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  padding-top: 50px;
+}
+
+.game1 .media-box audio {
+  display: none;
+}
+
+.game1 .help-bar {
+  position: absolute;
+  top: 100px;
+  right: 50px;
+  display: flex;
+  z-index: 10;
+}
+
+.game1 .help-bar div {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.5s;
+  color: #fff;
+  font-size: 20px;
+}
+
+.game1 .help-bar div:hover {
+  transform: scale(1.1);
+}
+
+.game1 .help-bar .info {
+  background-color: #a0c814;
+  margin-right: 10px;
+}
+
+.game1 .help-bar .help {
+  background-color: #5ac8f5;
+}
+
+.game1 .info-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  z-index: 10000;
+  align-items: center;
+}
+
+.game1 .info-box {
+  background-color: #a0c814;
+  width: max-content;
+  height: max-content;
+  padding: 20px 25px;
+  border-radius: 15px;
+  position: relative;
+  z-index: 10000;
+}
+
+.game1 .info-box .title {
+  color: #374105;
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.game1 .info-box .text {
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.game1 .info-box .close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #85a70e;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  transform: translate(50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.game1 .info-box .close img {
+  width: 35%;
+  margin-left: 5px;
+}
+
+.game1 .info-box .close:hover {
+  height: 40px;
+  width: 40px;
+}
+
+.game1 .help-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+  background-color: rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+.game1 .help-overlay img {
+  height: 50px;
+  position: absolute;
+  transition: 1s;
+  z-index: 10001;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.game1 .help-overlay .show {
+  opacity: 1;
+}
+/*# sourceMappingURL=game1.css.map */

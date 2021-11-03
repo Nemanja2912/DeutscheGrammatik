@@ -1,34 +1,7 @@
-// Import FONT
-@font-face {
-  font-family: Goethe;
-  src: url(../assets/font/GoetheGothic.ttf);
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: Goethe;
-  src: url(../assets/font/GoetheGothicBold.ttf);
-  font-weight: 700;
-}
-
-// Variable
 $BACKGROUND_COLOR: #fff;
 $GREEN_COLOR: #a0c814;
-$BROW_COLOR: #374105;
+$BROWN_COLOR: #374105;
 $GRAY_COLOR: #788287;
-
-// General
-* {
-  margin: 0;
-  padding: 0;
-  font-family: Goethe;
-  box-sizing: border-box;
-  transition-timing-function: linear;
-}
-
-body {
-  overflow: hidden;
-}
 
 // Menu
 .menu {
@@ -36,8 +9,14 @@ body {
   height: 100vh;
   width: 100vw;
   padding-left: 5vw;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000000;
   transition: 1s;
+  overflow: hidden;
 
   .top {
     padding-top: 15vh;
@@ -60,7 +39,7 @@ body {
   }
 
   .subtitle {
-    color: $BROW_COLOR;
+    color: $BROWN_COLOR;
     text-transform: uppercase;
     line-height: 20px;
   }
@@ -124,7 +103,7 @@ body {
 
     p {
       font-weight: 700;
-      color: $BROW_COLOR;
+      color: $BROWN_COLOR;
       font-size: 15px;
       cursor: pointer;
     }
@@ -336,7 +315,7 @@ body {
   }
 
   75% {
-    transform: scale(1.05);
+    transform: scale(1.15);
     opacity: 1;
   }
 

@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
-import "./css/style.css";
+import React, { useEffect, useState } from "react";
+import "./css/general.css";
+import Game1 from "./game1/game1";
 import Menu from "./menu/menu";
 
 function App() {
+  const [navMenuItem, setNavMenuItem] = useState(0);
+
   useEffect(() => {
     document
       .querySelector('meta[name="viewport"]')
@@ -13,7 +16,8 @@ function App() {
 
   return (
     <div className="App">
-      <Menu />
+      <Menu navMenuItem={navMenuItem} setNavMenuItem={setNavMenuItem} />
+      {navMenuItem === 0 ? <Game1 /> : ""}
     </div>
   );
 }

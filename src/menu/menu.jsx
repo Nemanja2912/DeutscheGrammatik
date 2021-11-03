@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import Arrow from "../assets/img/arrow_down.svg";
 import Screen1 from "./screen1";
 import Screen2 from "./screen2";
+import "../css/style.css";
 
-const Menu = () => {
+const Menu = ({ navMenuItem, setNavMenuItem }) => {
   const [movePos, setMovePos] = useState(0);
   const [buttonAnimation, setButtonAnimation] = useState(false);
-  const [navMenuItem, setNavMenuItem] = useState(0);
 
   const increaseMovePos = () => {
-    console.log("tes");
     if (movePos === 3) {
       setMovePos(0);
     } else {

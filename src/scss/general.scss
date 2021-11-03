@@ -1,0 +1,31 @@
+// Import FONT
+@font-face {
+  font-family: Goethe;
+  src: url(../assets/font/GoetheGothic.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Goethe;
+  src: url(../assets/font/GoetheGothicBold.ttf);
+  font-weight: 700;
+}
+
+// Variable
+$BACKGROUND_COLOR: #fff;
+$GREEN_COLOR: #a0c814;
+$BROWN_COLOR: #374105;
+$GRAY_COLOR: #788287;
+
+// General
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Goethe;
+  box-sizing: border-box;
+  transition-timing-function: linear;
+}
+
+body {
+  overflow: hidden;
+}
