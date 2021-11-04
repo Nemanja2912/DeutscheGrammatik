@@ -1,0 +1,52 @@
+$BACKGROUND_COLOR: #fff;
+$GREEN_COLOR: #a0c814;
+$BROWN_COLOR: #374105;
+$GRAY_COLOR: #dddddd;
+
+.game2 {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 50px;
+
+  .drop-area {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+
+    .blue-box {
+      background-color: #5ac8f5;
+      height: 100%;
+      width: 125px;
+      border-radius: 10px;
+      transition: 0.5s;
+    }
+  }
+
+  .texts {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 22px;
+    line-height: 36px;
+    position: relative;
+  }
+
+  .line {
+    position: relative;
+    transition: 0s;
+  }
+
+  .click-area {
+    cursor: pointer;
+    padding: 0 5px;
+    border-radius: 5px;
+    &:hover {
+      background-color: $GRAY_COLOR;
+    }
+  }
+
+  .line1 {
+    // top: 50px;
+  }
+}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./css/general.css";
 import Game1 from "./game1/game1";
+import Game2 from "./game2/game2";
 import Menu from "./menu/menu";
 
 function App() {
@@ -16,8 +17,10 @@ function App() {
 
   return (
     <div className="App">
-      <Menu navMenuItem={navMenuItem} setNavMenuItem={setNavMenuItem} />
-      {navMenuItem === 0 ? <Game1 /> : ""}
+      {/* <Menu navMenuItem={navMenuItem} setNavMenuItem={setNavMenuItem} /> */}
+      {/* {navMenuItem === 0 ? <Game1 /> : ""} */}
+      {/* {navMenuItem === 1 ? <Game2 /> : ""} */}
+      <Game2 />
     </div>
   );
 }

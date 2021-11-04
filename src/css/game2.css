@@ -1,0 +1,45 @@
+.game2 {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 50px;
+}
+
+.game2 .drop-area {
+  height: 400px;
+  display: flex;
+  justify-content: center;
+}
+
+.game2 .drop-area .blue-box {
+  background-color: #5ac8f5;
+  height: 100%;
+  width: 125px;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.game2 .texts {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 22px;
+  line-height: 36px;
+  position: relative;
+}
+
+.game2 .line {
+  position: relative;
+  transition: 0s;
+}
+
+.game2 .click-area {
+  cursor: pointer;
+  padding: 0 5px;
+  border-radius: 5px;
+}
+
+.game2 .click-area:hover {
+  background-color: #dddddd;
+}
+/*# sourceMappingURL=game2.css.map */
