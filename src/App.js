@@ -17,10 +17,9 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Menu navMenuItem={navMenuItem} setNavMenuItem={setNavMenuItem} /> */}
-      {/* {navMenuItem === 0 ? <Game1 /> : ""} */}
-      {/* {navMenuItem === 1 ? <Game2 /> : ""} */}
-      <Game2 />
+      <Menu navMenuItem={navMenuItem} setNavMenuItem={setNavMenuItem} />
+      {navMenuItem === 0 ? <Game1 /> : ""}
+      {navMenuItem === 1 ? <Game2 /> : ""}
     </div>
   );
 }

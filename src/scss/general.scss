@@ -29,3 +29,151 @@ $GRAY_COLOR: #788287;
 body {
   overflow: hidden;
 }
+
+.checkmark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  height: 150px;
+  width: 150px;
+  background-color: $GREEN_COLOR;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  pointer-events: none;
+  transition: 0.5s;
+
+  img {
+    width: 100%;
+  }
+}
+
+.zoom {
+  height: 200px !important;
+  width: 200px !important;
+}
+
+.help-bar {
+  position: absolute;
+  top: 100px;
+  right: 50px;
+  display: flex;
+  z-index: 10;
+
+  div {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.5s;
+    color: $BACKGROUND_COLOR;
+    font-size: 20px;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  .info {
+    background-color: $GREEN_COLOR;
+    margin-right: 10px;
+  }
+
+  .help {
+    background-color: #5ac8f5;
+  }
+}
+
+.info-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  z-index: 10000;
+  align-items: center;
+}
+
+.info-box {
+  background-color: $GREEN_COLOR;
+  width: max-content;
+  height: max-content;
+  padding: 20px 25px;
+  border-radius: 15px;
+  position: relative;
+  z-index: 10000;
+
+  .title {
+    color: $BROWN_COLOR;
+    font-size: 25px;
+    font-weight: bold;
+
+    margin-bottom: 15px;
+  }
+
+  .text {
+    color: $BACKGROUND_COLOR;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #85a70e;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    transform: translate(50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.5s;
+
+    img {
+      width: 35%;
+      margin-left: 5px;
+    }
+
+    &:hover {
+      height: 40px;
+      width: 40px;
+    }
+  }
+}
+
+.help-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+  background-color: rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+
+  img {
+    height: 50px;
+    position: absolute;
+    transition: 1s;
+    z-index: 10001;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .show {
+    opacity: 1;
+  }
+}

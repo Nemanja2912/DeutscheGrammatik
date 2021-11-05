@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../css/game1.css";
-import CheckMark from "../assets/img/check-solid.svg";
 import MediaBox from "./mediaBox";
-import Arrow from "../assets/img/chevron-right-solid.svg";
 import Finger from "../assets/img/finger.svg";
 import Play from "../assets/img/play.svg";
+import Indicator from "../component/indicator";
+import Info from "../component/info";
 
 let myTimeout;
 
@@ -199,14 +199,8 @@ const Game1 = () => {
             </div>
           )}
         </div>
-        <div className="checkmark">
-          <img
-            src={CheckMark}
-            alt=""
-            style={{ opacity: correct ? 1 : 0 }}
-            className={`${correct ? "zoom" : ""}`}
-          />
-        </div>
+        <Indicator indicator={correct} />
+
         {error && (
           <div
             className="error"
@@ -873,15 +867,7 @@ const Game1 = () => {
       <div className="images">{imageList}</div>
       {play && <MediaBox setPlay={setPlay} />}
       {info && (
-        <div className="info-overlay">
-          <div className="info-box">
-            <div className="title">AUFGABE</div>
-            <div className="text">Lies den Satz und markiere das Verb.</div>
-            <div className="close" onClick={() => setInfo(false)}>
-              <img src={Arrow} alt="" />
-            </div>
-          </div>
-        </div>
+        <Info setInfo={setInfo} desc="Lies den Satz und markiere das Verb." />
       )}
 
       <div className="help-overlay" style={{ opacity: fingerShow ? 1 : 0 }}>
