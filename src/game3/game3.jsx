@@ -39,12 +39,26 @@ const Game3 = () => {
     const initPosX = [];
 
     for (let i = 0; i < 3; i++) {
-      initPosX[i] = wordRef.current[i].current.getBoundingClientRect().left;
+      initPosX[i] = [
+        i,
+        wordRef.current[i].current.getBoundingClientRect().left,
+      ];
     }
 
-    // initPosX.sort((x, y) => x - y);
+    initPosX.sort((x, y) => x[1] - y[1]);
 
-    console.log(initPosX);
+    const findIndex = (n) => {
+      let newIndex;
+
+      initPosX.find((x, ind) => {
+        if (x[0] === n) {
+          newIndex = ind;
+        }
+        return x[0] === n;
+      });
+
+      return newIndex;
+    };
 
     const move = (e) => {
       position[index] = [
@@ -57,32 +71,24 @@ const Game3 = () => {
 
     window.addEventListener("mousemove", move);
 
-    window.addEventListener("mouseup", () => {
+    const mouseUp = () => {
       window.removeEventListener("mousemove", move);
 
       for (let i = 2; i >= 0; i--) {
         wordRef.current[i].current.style.transition = "0.5s";
       }
 
-      const initEl = initPosX[index];
+      const initEl = initPosX[findIndex(index)][1];
       let trueElement;
 
       for (let i = 2; i >= 0; i--) {
-        trueElement = initPosX[i];
+        const newIndex = initPosX[i][0];
+        trueElement = initPosX[i][1];
 
-        if (clientX > initPosX[i]) {
-          console.log("============================");
-          console.log("initEl", initEl);
-          console.log("trueEl", trueElement);
-          console.log("wordPos InitEl", wordPos[index]);
-          console.log("wordPos TrueEl", wordPos[i]);
-          console.log("============================");
-          console.log("calc", trueElement - initEl + wordPos[index][0]);
-          console.log("============================");
-
+        if (clientX > initPosX[i][1] || i === 0) {
           position[index] = [trueElement - initEl + wordPos[index][0], 0];
 
-          position[i] = [initEl - trueElement + wordPos[i][0], 0];
+          position[newIndex] = [initEl - trueElement + wordPos[newIndex][0], 0];
 
           break;
         }
@@ -95,21 +101,11 @@ const Game3 = () => {
           wordRef.current[i].current.style.transition = "0s";
         }
       }, 500);
-    });
 
-    // if (
-    //   containerRef.current[2].current.getBoundingClientRect().left < e.clientX
-    // ) {
-    //   let position = [...wordPos];
-    //   position[2] = [
-    //     containerRef.current[index].current.getBoundingClientRect().left -
-    //       containerRef.current[2].current.getBoundingClientRect().left,
-    //     0,
-    //   ];
-    //   position[index] = [e.clientX - pos[0], e.clientY - pos[1]];
-    //   wordRef.current[2].current.style.transition = "0.5s";
-    //   setWordPos([...position]);
-    // }
+      window.removeEventListener("mouseup", mouseUp);
+    };
+
+    window.addEventListener("mouseup", mouseUp);
   };
 
   return (
