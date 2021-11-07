@@ -81,15 +81,12 @@ const Game2 = () => {
       setLinePos([...position]);
       cursorY = e.clientY;
       cursorX = e.clientX;
-      console.log("test12");
     }
 
     window.addEventListener("mousemove", moveCursor);
 
     function mouseUp() {
       window.removeEventListener("mousemove", moveCursor);
-
-      console.log("test");
 
       let blueBox = blueBoxRef.current.getBoundingClientRect();
 
