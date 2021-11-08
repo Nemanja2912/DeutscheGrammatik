@@ -13,14 +13,13 @@ $GRAY_COLOR: #dddddd;
   .line {
     margin-bottom: 20px;
     font-size: 24px;
-    position: absolute;
 
     display: flex;
 
     .container {
       margin: 0 5px;
       border: 1px solid blue;
-      width: 100%;
+      transition: 0.5s;
 
       -webkit-touch-callout: none; /* iOS Safari */
       -webkit-user-select: none; /* Safari */

@@ -1,15 +1,16 @@
 import React, { useState, useRef, useEffect, createRef } from "react";
 import "../css/game3.css";
 
-const line = [["0. Michaela", "1. repariert", "2. das Auto."]];
+const line = [["Michaela", "repariert", "bolest", "das Auto."]];
 
-const n = [0, 1, 2];
+const n = [0, 1, 2, 3];
 
 const Game3 = () => {
   const wordRef = useRef([]);
   const containerRef = useRef([]);
   const [wordWidth, setWordWidth] = useState(["100%"]);
   const [wordPos, setWordPos] = useState([
+    [0, 0],
     [0, 0],
     [0, 0],
     [0, 0],
@@ -24,7 +25,7 @@ const Game3 = () => {
   useEffect(() => {
     setTimeout(() => {
       const width = [];
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < line[0].length; i++) {
         width[i] = wordRef.current[i].current.offsetWidth;
       }
 
@@ -38,7 +39,7 @@ const Game3 = () => {
 
     const initPosX = [];
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < line[0].length; i++) {
       initPosX[i] = [
         i,
         wordRef.current[i].current.getBoundingClientRect().left,
@@ -74,14 +75,15 @@ const Game3 = () => {
     const mouseUp = () => {
       window.removeEventListener("mousemove", move);
 
-      for (let i = 2; i >= 0; i--) {
+      for (let i = line[0].length - 1; i >= 0; i--) {
         wordRef.current[i].current.style.transition = "0.5s";
       }
 
       const initEl = initPosX[findIndex(index)][1];
       let trueElement;
+      const newWidth = [...wordWidth];
 
-      for (let i = 2; i >= 0; i--) {
+      for (let i = line[0].length - 1; i >= 0; i--) {
         const newIndex = initPosX[i][0];
         trueElement = initPosX[i][1];
 
@@ -90,14 +92,20 @@ const Game3 = () => {
 
           position[newIndex] = [initEl - trueElement + wordPos[newIndex][0], 0];
 
+          // newWidth[i] = wordRef.current[index].current.offsetWidth;
+          // newWidth[index] = wordRef.current[i].current.offsetWidth;
+          // position[index] = [position[index][0] - 25, 0];
+
           break;
         }
       }
 
+      setWordWidth([...newWidth]);
+
       setWordPos([...position]);
 
       setTimeout(() => {
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < line[0].length; i++) {
           wordRef.current[i].current.style.transition = "0s";
         }
       }, 500);
