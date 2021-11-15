@@ -1,0 +1,96 @@
+$BACKGROUND_COLOR: #fff;
+$GREEN_COLOR: #a0c814;
+$BROWN_COLOR: #374105;
+$GRAY_COLOR: #dddddd;
+
+* {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.game4 {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  padding-top: 125px;
+  flex-direction: column;
+
+  .button {
+    font-size: 25px;
+    background-color: $BACKGROUND_COLOR;
+    color: $BROWN_COLOR !important;
+    width: max-content;
+    font-weight: 700;
+    margin-top: 20px;
+    padding: 20px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    animation-name: buttonShow;
+    animation-duration: 1s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
+    transition: 0.5s;
+
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+    }
+  }
+
+  .click {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+  }
+
+  .image {
+    height: 300px;
+    width: 400px;
+    margin-bottom: 25px;
+    transition: 0.5s;
+  }
+
+  .verb {
+    margin-bottom: 30px;
+    cursor: pointer;
+    position: relative;
+    background-color: #5ac8f5;
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 100;
+    width: max-content;
+  }
+
+  .word {
+    padding: 5px 0;
+    position: relative;
+    transition: 0.2s;
+  }
+
+  .line {
+    display: flex;
+    gap: 15px;
+  }
+
+  .line,
+  .verb {
+    font-size: 25px;
+  }
+
+  .result {
+    font-size: 22px;
+    line-height: 45px;
+
+    .verb {
+      font-size: 22px;
+      background-color: $GREEN_COLOR;
+      cursor: default;
+    }
+  }
+}
