@@ -15,6 +15,7 @@ const Game3 = () => {
       ref: createRef(),
       key: i,
       coordX: 0,
+      side: i === 0 ? "left" : i === 1 ? "center" : "right",
     };
   }
 
@@ -32,7 +33,7 @@ const Game3 = () => {
 
       console.log("Finished!");
       updateWord([...wordObj]);
-    }, 2000);
+    }, 500);
   }, []);
 
   const [word, updateWord] = useState(wordObj);
@@ -59,14 +60,29 @@ const Game3 = () => {
         (word) =>
           clientX > word.coordXStart + word.width * 0.3 &&
           clientX < word.coordXEnd - word.width * 0.3 &&
-          index !== word.key
+          index !== word.key &&
+          word.key !== 1
       );
 
-      if (targetElementIndex !== -1) {
-        if (e.clientX > wordObj[elementIndex].coordXStart) {
-          let tempCoordStart = wordObj[targetElementIndex].coordXStart;
-          let tempCoordEnd = wordObj[targetElementIndex].coordXEnd;
+      console.log(elementIndex);
 
+      if (
+        targetElementIndex !== -1 &&
+        elementIndex !== 1 &&
+        !(
+          elementIndex === 0 &&
+          wordObj[elementIndex].side === wordObj[targetElementIndex].side
+        ) &&
+        !(
+          targetElementIndex === 0 &&
+          wordObj[elementIndex].side === wordObj[targetElementIndex].side
+        )
+      ) {
+        let tempCoordStart = wordObj[targetElementIndex].coordXStart;
+        let tempCoordEnd = wordObj[targetElementIndex].coordXEnd;
+        let tempSide = wordObj[targetElementIndex].side;
+
+        const leftToRight = () => {
           // ElementTarget
           wordObj[targetElementIndex].left =
             wordObj[elementIndex].coordXStart -
@@ -85,10 +101,9 @@ const Game3 = () => {
           wordObj[elementIndex].coordXStart =
             tempCoordEnd - wordObj[elementIndex].width;
           wordObj[elementIndex].coordXEnd = tempCoordEnd;
-        } else {
-          let tempCoordStart = wordObj[targetElementIndex].coordXStart;
-          let tempCoordEnd = wordObj[targetElementIndex].coordXEnd;
+        };
 
+        const rightToLeft = () => {
           // ElementTarget
           wordObj[targetElementIndex].left =
             wordObj[elementIndex].coordXEnd -
@@ -107,7 +122,29 @@ const Game3 = () => {
           wordObj[elementIndex].coordXStart = tempCoordStart;
           wordObj[elementIndex].coordXEnd =
             tempCoordStart + wordObj[elementIndex].width;
+        };
+
+        if (
+          e.clientX > wordObj[elementIndex].coordXStart &&
+          wordObj[elementIndex].side === wordObj[targetElementIndex].side
+        ) {
+          leftToRight();
+        } else if (
+          e.clientX < wordObj[elementIndex].coordXStart &&
+          wordObj[elementIndex].side === wordObj[targetElementIndex].side
+        ) {
+          rightToLeft();
+        } else if (
+          e.clientX > wordObj[elementIndex].coordXStart &&
+          wordObj[elementIndex].side !== wordObj[targetElementIndex].side
+        ) {
+          rightToLeft();
+        } else {
+          leftToRight();
         }
+
+        wordObj[targetElementIndex].side = wordObj[elementIndex].side;
+        wordObj[elementIndex].side = tempSide;
       }
 
       clientX = e.clientX;
