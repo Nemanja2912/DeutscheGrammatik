@@ -1,167 +1,122 @@
 import React, { useState, useRef, useEffect, createRef } from "react";
 import "../css/game3.css";
 
-const line = [["Michaela", "repariert", "bolest", "das Auto."]];
-
-const n = [0, 1, 2, 3];
-
 const Game3 = () => {
-  const wordRef = useRef([]);
-  const containerRef = useRef([]);
-  const [wordWidth, setWordWidth] = useState(["100%"]);
-  const [wordPos, setWordPos] = useState([
-    [0, 0],
-    [0, 0],
-    [0, 0],
-    [0, 0],
-  ]);
-  const [pos, setPos] = useState([]);
+  const list = ["Michaela", "repariert", "das Auto"];
 
-  wordRef.current = n.map((el, i) => wordRef.current[i] ?? createRef());
-  containerRef.current = n.map(
-    (el, i) => containerRef.current[i] ?? createRef()
-  );
+  const [pos, setPos] = useState([0, 0]);
+
+  const wordObj = [];
+
+  for (let i = 0; i < list.length; i++) {
+    wordObj[i] = {
+      left: 0,
+      top: 0,
+      ref: createRef(),
+      key: i,
+      coordX: 0,
+    };
+  }
 
   useEffect(() => {
-    setTimeout(() => {
-      const width = [];
-      for (let i = 0; i < line[0].length; i++) {
-        width[i] = wordRef.current[i].current.offsetWidth;
-      }
+    const wordObj = [...word];
 
-      setWordWidth([...width]);
-    }, 100);
-  }, []);
+    for (let i = 0; i < list.length; i++) {
+      wordObj[i].coordXStart = word[i].ref.current.getBoundingClientRect().left;
+      wordObj[i].coordXEnd = word[i].ref.current.getBoundingClientRect().right;
+      wordObj[i].width = word[i].ref.current.getBoundingClientRect().width;
 
-  const handleMove = (index) => {
-    let position = [...wordPos];
-    let clientX;
-
-    const initPosX = [];
-
-    for (let i = 0; i < line[0].length; i++) {
-      initPosX[i] = [
-        i,
-        wordRef.current[i].current.getBoundingClientRect().left,
-      ];
+      console.log(wordObj[i].width);
     }
 
-    initPosX.sort((x, y) => x[1] - y[1]);
+    updateWord([...wordObj]);
+  }, []);
 
-    const findIndex = (n) => {
-      let newIndex;
+  const [word, updateWord] = useState(wordObj);
 
-      initPosX.find((x, ind) => {
-        if (x[0] === n) {
-          newIndex = ind;
-        }
-        return x[0] === n;
-      });
+  const handleMove = (index) => {
+    const wordObj = [...word];
 
-      return newIndex;
-    };
+    wordObj.sort((x, y) => x.coordX - y.coordX);
+
+    let initX = wordObj[index].left;
+    let initY = wordObj[index].top;
+
+    const elementIndex = wordObj.findIndex((word) => index === word.key);
+    let initCoordX = wordObj[elementIndex].coordXStart;
+
+    let clientX;
 
     const move = (e) => {
-      position[index] = [
-        wordPos[index][0] + (e.clientX - pos[0]),
-        wordPos[index][1] + (e.clientY - pos[1]),
-      ];
-      setWordPos([...position]);
+      const elementIndex = wordObj.findIndex((word) => index === word.key);
+      wordObj[elementIndex].left = e.clientX - pos[0] + initX;
+      wordObj[elementIndex].top = e.clientY - pos[1] + initY;
+
+      let targetElementIndex = wordObj.findIndex(
+        (word) =>
+          clientX > word.coordXStart &&
+          clientX < word.coordXEnd &&
+          index !== word.key
+      );
+
+      if (targetElementIndex !== -1) {
+        let tempCoordStart = wordObj[targetElementIndex].coordXStart;
+        let tempCoordEnd = wordObj[targetElementIndex].coordXEnd;
+
+        wordObj[targetElementIndex].left =
+          wordObj[elementIndex].coordXStart -
+          wordObj[targetElementIndex].coordXStart +
+          wordObj[targetElementIndex].left;
+
+        wordObj[targetElementIndex].coordXStart =
+          wordObj[elementIndex].coordXStart;
+
+        wordObj[targetElementIndex].coordXEnd = wordObj[elementIndex].coordXEnd;
+
+        wordObj[elementIndex].coordXStart = tempCoordStart;
+        wordObj[elementIndex].coordXEnd = tempCoordEnd;
+      }
+
       clientX = e.clientX;
+
+      updateWord([...wordObj]);
     };
 
-    window.addEventListener("mousemove", move);
+    const moveEnd = () => {
+      document.removeEventListener("mousemove", move);
 
-    const mouseUp = () => {
-      window.removeEventListener("mousemove", move);
+      const elementIndex = wordObj.findIndex((word) => index === word.key);
 
-      for (let i = line[0].length - 1; i >= 0; i--) {
-        wordRef.current[i].current.style.transition = "0.5s";
-      }
+      wordObj[elementIndex].left =
+        wordObj[elementIndex].coordXStart - initCoordX + initX;
+      wordObj[elementIndex].top = 0;
 
-      const initEl = initPosX[findIndex(index)][1];
-      let trueElement;
-      const newWidth = [...wordWidth];
+      updateWord([...wordObj]);
 
-      for (let i = line[0].length - 1; i >= 0; i--) {
-        const newIndex = initPosX[i][0];
-        trueElement = initPosX[i][1];
-
-        if (clientX > initPosX[i][1] || i === 0) {
-          position[index] = [trueElement - initEl + wordPos[index][0], 0];
-
-          position[newIndex] = [initEl - trueElement + wordPos[newIndex][0], 0];
-
-          // newWidth[i] = wordRef.current[index].current.offsetWidth;
-          // newWidth[index] = wordRef.current[i].current.offsetWidth;
-          // position[index] = [position[index][0] - 25, 0];
-
-          break;
-        }
-      }
-
-      setWordWidth([...newWidth]);
-
-      setWordPos([...position]);
-
-      setTimeout(() => {
-        for (let i = 0; i < line[0].length; i++) {
-          wordRef.current[i].current.style.transition = "0s";
-        }
-      }, 500);
-
-      window.removeEventListener("mouseup", mouseUp);
+      document.removeEventListener("mouseup", moveEnd);
     };
 
-    window.addEventListener("mouseup", mouseUp);
+    document.addEventListener("mousemove", move);
+
+    document.addEventListener("mouseup", moveEnd);
   };
 
   return (
     <div className="game3">
-      <div className="display">
-        {line.map((line, index) => (
-          <div className="line">
-            {line.map((word, index) => (
-              <>
-                <div
-                  className="container"
-                  style={{ width: wordWidth[index] }}
-                  ref={containerRef.current[index]}
-                >
-                  <div
-                    className="word"
-                    ref={wordRef.current[index]}
-                    style={{ left: wordPos[index][0], top: wordPos[index][1] }}
-                    onMouseDown={() => handleMove(index)}
-                    onMouseMove={(e) => {
-                      setPos([e.clientX, e.clientY]);
-                    }}
-                  >
-                    {word}
-                  </div>
-                </div>
-              </>
-            ))}
+      {list.map((item, index) => {
+        return (
+          <div
+            className="word"
+            onMouseMove={(e) => setPos([e.clientX, e.clientY])}
+            onMouseDown={() => handleMove(index)}
+            style={{ left: word[index].left, top: word[index].top }}
+            ref={word[index].ref}
+            wordKey={word[index].key}
+          >
+            {item}
           </div>
-        ))}
-
-        {/* <div className="line">
-          <span className="word">Michaela</span>
-          <span className="word verb">geht</span>
-          <span className="word">nach dem Seminar</span>
-          <span className="word">in die Bibliothek.</span>
-        </div>
-        <div className="line">
-          <span className="word">Am Abend</span>
-          <span className="word verb">sitzen</span>
-          <span className="word">sie</span>
-          <span className="word">in einem Café.</span>
-        </div> */}
-      </div>
-
-      <div className="verb-area">
-        <div className="bluebox"></div>
-      </div>
+        );
+      })}
     </div>
   );
 };
