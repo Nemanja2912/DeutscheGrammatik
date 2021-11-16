@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, createRef } from "react";
 
-const Line1 = () => {
-  const list = ["Michaela", "repariert", "das Auto."];
+const Line3 = () => {
+  const list = ["Sie", "sitzen", "in einem Café.", "am Abend"];
 
   const [pos, setPos] = useState([0, 0]);
 
@@ -243,7 +243,7 @@ const Line1 = () => {
   };
 
   return (
-    <div className="line line1">
+    <div className="line line3">
       {list.map((item, index) => {
         return (
           <>
@@ -279,4 +279,4 @@ const Line1 = () => {
   );
 };
 
-export default Line1;
+export default Line3;
