@@ -6,21 +6,59 @@ $GRAY_COLOR: #dddddd;
 .game3 {
   height: 100vh;
   padding-top: 100px;
+  margin-left: 300px;
 
-  display: flex;
-  justify-content: center;
-  gap: 15px;
+  .line {
+    display: flex;
+    gap: 15px;
+    position: relative;
+    align-items: center;
+  }
+
+  .line1 {
+    .center {
+      border-radius: 10px 10px 0 0;
+    }
+  }
+
+  .line2 {
+    left: -66.5px;
+  }
 
   .word {
     font-size: 25px;
     position: relative;
     height: max-content;
+    cursor: pointer;
+    padding: 0 5px;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $GRAY_COLOR;
+    }
     // border: 1px solid red;
   }
 
-  .verb {
+  .center {
+    background-color: #5ac8f5;
     width: 150px;
-    background-color: lightblue;
-    text-align: center;
+    display: flex;
+    padding: 10px 0;
+    justify-content: center;
+  }
+
+  .verb {
+    // z-index: -1;
+    font-size: 25px;
+    position: relative;
+    height: max-content;
+    cursor: pointer;
+    padding: 0 5px;
+    border-radius: 5px;
+    width: max-content;
+
+    &:hover {
+      background-color: $GRAY_COLOR;
+    }
   }
 }

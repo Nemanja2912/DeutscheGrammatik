@@ -1,20 +1,56 @@
 .game3 {
   height: 100vh;
   padding-top: 100px;
+  margin-left: 300px;
+}
+
+.game3 .line {
   display: flex;
-  justify-content: center;
   gap: 15px;
+  position: relative;
+  align-items: center;
+}
+
+.game3 .line1 .center {
+  border-radius: 10px 10px 0 0;
+}
+
+.game3 .line2 {
+  left: -66.5px;
 }
 
 .game3 .word {
   font-size: 25px;
   position: relative;
   height: max-content;
+  cursor: pointer;
+  padding: 0 5px;
+  border-radius: 5px;
+}
+
+.game3 .word:hover {
+  background-color: #dddddd;
+}
+
+.game3 .center {
+  background-color: #5ac8f5;
+  width: 150px;
+  display: flex;
+  padding: 10px 0;
+  justify-content: center;
 }
 
 .game3 .verb {
-  width: 150px;
-  background-color: lightblue;
-  text-align: center;
+  font-size: 25px;
+  position: relative;
+  height: max-content;
+  cursor: pointer;
+  padding: 0 5px;
+  border-radius: 5px;
+  width: max-content;
+}
+
+.game3 .verb:hover {
+  background-color: #dddddd;
 }
 /*# sourceMappingURL=game3.css.map */
