@@ -12,9 +12,15 @@ $GRAY_COLOR: #dddddd;
   gap: 15px;
 
   .word {
-    width: 150px;
     font-size: 25px;
     position: relative;
     height: max-content;
+    // border: 1px solid red;
+  }
+
+  .verb {
+    // width: 150px;
+    background-color: lightblue;
+    text-align: center;
   }
 }

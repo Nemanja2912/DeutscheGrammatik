@@ -7,9 +7,13 @@
 }
 
 .game3 .word {
-  width: 150px;
   font-size: 25px;
   position: relative;
   height: max-content;
+}
+
+.game3 .verb {
+  background-color: lightblue;
+  text-align: center;
 }
 /*# sourceMappingURL=game3.css.map */

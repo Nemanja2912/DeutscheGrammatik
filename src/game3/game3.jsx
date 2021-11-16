@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, createRef } from "react";
 import "../css/game3.css";
 
 const Game3 = () => {
-  const list = ["Michaela", "repariert", "das Auto"];
+  const list = ["Sie", "sitzen", "in einem Cafe", "am Abend."];
 
   const [pos, setPos] = useState([0, 0]);
 
@@ -19,17 +19,20 @@ const Game3 = () => {
   }
 
   useEffect(() => {
-    const wordObj = [...word];
+    setTimeout(() => {
+      const wordObj = [...word];
 
-    for (let i = 0; i < list.length; i++) {
-      wordObj[i].coordXStart = word[i].ref.current.getBoundingClientRect().left;
-      wordObj[i].coordXEnd = word[i].ref.current.getBoundingClientRect().right;
-      wordObj[i].width = word[i].ref.current.getBoundingClientRect().width;
+      for (let i = 0; i < list.length; i++) {
+        wordObj[i].coordXStart =
+          word[i].ref.current.getBoundingClientRect().left;
+        wordObj[i].coordXEnd =
+          word[i].ref.current.getBoundingClientRect().right;
+        wordObj[i].width = word[i].ref.current.getBoundingClientRect().width;
+      }
 
-      console.log(wordObj[i].width);
-    }
-
-    updateWord([...wordObj]);
+      console.log("Finished!");
+      updateWord([...wordObj]);
+    }, 2000);
   }, []);
 
   const [word, updateWord] = useState(wordObj);
@@ -54,27 +57,57 @@ const Game3 = () => {
 
       let targetElementIndex = wordObj.findIndex(
         (word) =>
-          clientX > word.coordXStart &&
-          clientX < word.coordXEnd &&
+          clientX > word.coordXStart + word.width * 0.3 &&
+          clientX < word.coordXEnd - word.width * 0.3 &&
           index !== word.key
       );
 
       if (targetElementIndex !== -1) {
-        let tempCoordStart = wordObj[targetElementIndex].coordXStart;
-        let tempCoordEnd = wordObj[targetElementIndex].coordXEnd;
+        if (e.clientX > wordObj[elementIndex].coordXStart) {
+          let tempCoordStart = wordObj[targetElementIndex].coordXStart;
+          let tempCoordEnd = wordObj[targetElementIndex].coordXEnd;
 
-        wordObj[targetElementIndex].left =
-          wordObj[elementIndex].coordXStart -
-          wordObj[targetElementIndex].coordXStart +
-          wordObj[targetElementIndex].left;
+          // ElementTarget
+          wordObj[targetElementIndex].left =
+            wordObj[elementIndex].coordXStart -
+            wordObj[targetElementIndex].coordXStart +
+            wordObj[targetElementIndex].left;
 
-        wordObj[targetElementIndex].coordXStart =
-          wordObj[elementIndex].coordXStart;
+          wordObj[targetElementIndex].coordXStart =
+            wordObj[elementIndex].coordXStart;
 
-        wordObj[targetElementIndex].coordXEnd = wordObj[elementIndex].coordXEnd;
+          wordObj[targetElementIndex].coordXEnd =
+            wordObj[elementIndex].coordXStart +
+            wordObj[targetElementIndex].width;
 
-        wordObj[elementIndex].coordXStart = tempCoordStart;
-        wordObj[elementIndex].coordXEnd = tempCoordEnd;
+          // ElementMove
+
+          wordObj[elementIndex].coordXStart =
+            tempCoordEnd - wordObj[elementIndex].width;
+          wordObj[elementIndex].coordXEnd = tempCoordEnd;
+        } else {
+          let tempCoordStart = wordObj[targetElementIndex].coordXStart;
+          let tempCoordEnd = wordObj[targetElementIndex].coordXEnd;
+
+          // ElementTarget
+          wordObj[targetElementIndex].left =
+            wordObj[elementIndex].coordXEnd -
+            wordObj[targetElementIndex].width -
+            wordObj[targetElementIndex].coordXStart +
+            wordObj[targetElementIndex].left;
+
+          wordObj[targetElementIndex].coordXStart =
+            wordObj[elementIndex].coordXEnd - wordObj[targetElementIndex].width;
+
+          wordObj[targetElementIndex].coordXEnd =
+            wordObj[elementIndex].coordXEnd;
+
+          // ElementMove
+
+          wordObj[elementIndex].coordXStart = tempCoordStart;
+          wordObj[elementIndex].coordXEnd =
+            tempCoordStart + wordObj[elementIndex].width;
+        }
       }
 
       clientX = e.clientX;
@@ -106,7 +139,7 @@ const Game3 = () => {
       {list.map((item, index) => {
         return (
           <div
-            className="word"
+            className={`word ${index === 1 && "verb"}`}
             onMouseMove={(e) => setPos([e.clientX, e.clientY])}
             onMouseDown={() => handleMove(index)}
             style={{ left: word[index].left, top: word[index].top }}
