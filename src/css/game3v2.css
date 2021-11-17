@@ -1,0 +1,79 @@
+* {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  /* Safari */
+  /* Konqueror HTML */
+  /* Old versions of Firefox */
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+#centar {
+  background: #5ac8f5;
+  width: 150px;
+  text-align: center;
+}
+
+.line3 {
+  position: relative;
+  left: -59.5px !important;
+}
+
+.game3v2 {
+  height: 100vh;
+  padding-top: 150px;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-left: 200px;
+}
+
+#levo,
+#desno {
+  display: flex;
+  /*gap: 0.5em;*/
+}
+
+#desno > div > .wrapper,
+#levo > div > .wrapper {
+  padding: 0 5px;
+}
+
+#centar .word {
+  padding: 10px;
+}
+
+.line1 > #centar {
+  border-radius: 10px 10px 0 0;
+}
+
+.line3 > #centar {
+  border-radius: 0 0 10px 10px;
+}
+
+.word {
+  position: relative;
+  cursor: pointer;
+  transition: all 0s ease 0s;
+  font-size: 25px;
+}
+
+.word p {
+  transition: 0.5s;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.word p:hover {
+  background-color: #dddddd;
+}
+
+.transition {
+  transition: all 0.2s ease 0s !important;
+}
+/*# sourceMappingURL=game3v2.css.map */
