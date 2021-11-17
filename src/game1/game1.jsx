@@ -103,70 +103,90 @@ const Game1 = () => {
     setFingerShow(true);
 
     if (level === 0) {
-      correctRef1.current.click();
+      setTimeout(() => {
+        correctRef1.current.click();
+      }, 1000);
       setFingerPos([
         correctRef1.current.offsetTop + 5,
         correctRef1.current.offsetLeft + 5,
       ]);
     }
     if (level === 1) {
-      correctRef2.current.click();
+      setTimeout(() => {
+        correctRef2.current.click();
+      }, 1000);
       setFingerPos([
         correctRef2.current.offsetTop + 5,
         correctRef2.current.offsetLeft + 5,
       ]);
     }
     if (level === 2) {
-      correctRef3.current.click();
+      setTimeout(() => {
+        correctRef3.current.click();
+      }, 1000);
       setFingerPos([
         correctRef3.current.offsetTop + 5,
         correctRef3.current.offsetLeft + 5,
       ]);
     }
     if (level === 3) {
-      correctRef4.current.click();
+      setTimeout(() => {
+        correctRef4.current.click();
+      }, 1000);
       setFingerPos([
         correctRef4.current.offsetTop + 5,
         correctRef4.current.offsetLeft + 5,
       ]);
     }
     if (level === 4) {
-      correctRef5.current.click();
+      setTimeout(() => {
+        correctRef5.current.click();
+      }, 1000);
       setFingerPos([
         correctRef5.current.offsetTop + 5,
         correctRef5.current.offsetLeft + 5,
       ]);
     }
     if (level === 5) {
-      correctRef6.current.click();
+      setTimeout(() => {
+        correctRef6.current.click();
+      }, 1000);
       setFingerPos([
         correctRef6.current.offsetTop + 5,
         correctRef6.current.offsetLeft + 5,
       ]);
     }
     if (level === 6) {
-      correctRef7.current.click();
+      setTimeout(() => {
+        correctRef7.current.click();
+      }, 1000);
       setFingerPos([
         correctRef7.current.offsetTop + 5,
         correctRef7.current.offsetLeft + 5,
       ]);
     }
     if (level === 7) {
-      correctRef8.current.click();
+      setTimeout(() => {
+        correctRef8.current.click();
+      }, 1000);
       setFingerPos([
         correctRef8.current.offsetTop + 5,
         correctRef8.current.offsetLeft + 5,
       ]);
     }
     if (level === 8) {
-      correctRef9.current.click();
+      setTimeout(() => {
+        correctRef9.current.click();
+      }, 1000);
       setFingerPos([
         correctRef9.current.offsetTop + 5,
         correctRef9.current.offsetLeft + 5,
       ]);
     }
     if (level === 9) {
-      correctRef10.current.click();
+      setTimeout(() => {
+        correctRef10.current.click();
+      }, 1000);
       setFingerPos([
         correctRef10.current.offsetTop + 5,
         correctRef10.current.offsetLeft + 5,

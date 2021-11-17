@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, createRef } from "react";
 
 const Line3 = () => {
-  const list = ["Sie", "sitzen", "in einem Café.", "am Abend"];
+  const list = ["in einem Café.", "sitzen", "Sie", "am Abend"];
 
   const [pos, setPos] = useState([0, 0]);
 
@@ -71,11 +71,11 @@ const Line3 = () => {
         targetElementIndex !== -1 &&
         elementIndex !== 1 &&
         !(
-          elementIndex === 0 &&
+          elementIndex === 2 &&
           wordObj[elementIndex].side === wordObj[targetElementIndex].side
         ) &&
         !(
-          targetElementIndex === 0 &&
+          targetElementIndex === 2 &&
           wordObj[elementIndex].side === wordObj[targetElementIndex].side
         ) &&
         !isMove
@@ -152,7 +152,7 @@ const Line3 = () => {
             if (
               wordObj[i].side === "right" &&
               i !== targetElementIndex &&
-              i !== 0
+              i !== 2
             ) {
               wordObj[i].ref.current.style.transition = "0.2s";
               wordObj[i].left =
@@ -179,7 +179,7 @@ const Line3 = () => {
               wordObj[i].side === "right" &&
               i !== targetElementIndex &&
               i !== elementIndex &&
-              i !== 0
+              i !== 2
             ) {
               wordObj[i].left =
                 wordObj[targetElementIndex].width -

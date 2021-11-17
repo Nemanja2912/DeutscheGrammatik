@@ -5,7 +5,7 @@ $GRAY_COLOR: #dddddd;
 
 .game3 {
   height: 100vh;
-  padding-top: 100px;
+  padding-top: 150px;
   margin-left: 200px;
   width: 1000px;
 
@@ -23,7 +23,13 @@ $GRAY_COLOR: #dddddd;
   }
 
   .line3 {
-    left: 66.5px;
+    .center {
+      border-radius: 0 0 10px 10px;
+    }
+  }
+
+  .line3 {
+    left: -60px;
   }
 
   .word {

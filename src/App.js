@@ -20,14 +20,14 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Menu navMenuItem={navMenuItem} setNavMenuItem={setNavMenuItem} />
+      <Menu navMenuItem={navMenuItem} setNavMenuItem={setNavMenuItem} />
       {navMenuItem === 0 ? <Game1 /> : ""}
       {navMenuItem === 1 ? <Game2 /> : ""}
       {navMenuItem === 2 ? <Game3 /> : ""}
       {navMenuItem === 3 ? <Game4 /> : ""}
-      {navMenuItem === 4 ? <Game5 /> : ""} */}
+      {navMenuItem === 4 ? <Game5 /> : ""}
 
-      <Game3 />
+      {/* <Game3 /> */}
     </div>
   );
 }
