@@ -1,19 +1,22 @@
 {
   "files": {
-    "main.css": "/DeutscheGrammatik/static/css/main.01a25d02.chunk.css",
-    "main.js": "/DeutscheGrammatik/static/js/main.85c4bcfd.chunk.js",
-    "main.js.map": "/DeutscheGrammatik/static/js/main.85c4bcfd.chunk.js.map",
+    "main.css": "/DeutscheGrammatik/static/css/main.cc763864.chunk.css",
+    "main.js": "/DeutscheGrammatik/static/js/main.35959d58.chunk.js",
+    "main.js.map": "/DeutscheGrammatik/static/js/main.35959d58.chunk.js.map",
     "runtime-main.js": "/DeutscheGrammatik/static/js/runtime-main.d20d72d7.js",
     "runtime-main.js.map": "/DeutscheGrammatik/static/js/runtime-main.d20d72d7.js.map",
-    "static/js/2.670bef7c.chunk.js": "/DeutscheGrammatik/static/js/2.670bef7c.chunk.js",
-    "static/js/2.670bef7c.chunk.js.map": "/DeutscheGrammatik/static/js/2.670bef7c.chunk.js.map",
+    "static/js/2.31f5cb31.chunk.js": "/DeutscheGrammatik/static/js/2.31f5cb31.chunk.js",
+    "static/js/2.31f5cb31.chunk.js.map": "/DeutscheGrammatik/static/js/2.31f5cb31.chunk.js.map",
     "index.html": "/DeutscheGrammatik/index.html",
-    "static/css/main.01a25d02.chunk.css.map": "/DeutscheGrammatik/static/css/main.01a25d02.chunk.css.map",
-    "static/js/2.670bef7c.chunk.js.LICENSE.txt": "/DeutscheGrammatik/static/js/2.670bef7c.chunk.js.LICENSE.txt",
+    "static/css/main.cc763864.chunk.css.map": "/DeutscheGrammatik/static/css/main.cc763864.chunk.css.map",
+    "static/js/2.31f5cb31.chunk.js.LICENSE.txt": "/DeutscheGrammatik/static/js/2.31f5cb31.chunk.js.LICENSE.txt",
+    "static/media/1.1f5c7ad5.jpg": "/DeutscheGrammatik/static/media/1.1f5c7ad5.jpg",
     "static/media/1.jpg": "/DeutscheGrammatik/static/media/1.d9e6505f.jpg",
     "static/media/10.jpg": "/DeutscheGrammatik/static/media/10.bc938655.jpg",
     "static/media/2.jpg": "/DeutscheGrammatik/static/media/2.6faa49b1.jpg",
+    "static/media/2.92ed3e29.jpg": "/DeutscheGrammatik/static/media/2.92ed3e29.jpg",
     "static/media/3.jpg": "/DeutscheGrammatik/static/media/3.1e976922.jpg",
+    "static/media/3.cf779487.jpg": "/DeutscheGrammatik/static/media/3.cf779487.jpg",
     "static/media/4.jpg": "/DeutscheGrammatik/static/media/4.da87c7f0.jpg",
     "static/media/5.jpg": "/DeutscheGrammatik/static/media/5.96e93431.jpg",
     "static/media/6.jpg": "/DeutscheGrammatik/static/media/6.4a96051f.jpg",
@@ -22,7 +25,7 @@
     "static/media/9.jpg": "/DeutscheGrammatik/static/media/9.04f9bc88.jpg",
     "static/media/general.css": "/DeutscheGrammatik/static/media/GoetheGothicBold.612e7d20.ttf",
     "static/media/arrow_down.280089b6.svg": "/DeutscheGrammatik/static/media/arrow_down.280089b6.svg",
-    "static/media/check-solid.5dcf9568.svg": "/DeutscheGrammatik/static/media/check-solid.5dcf9568.svg",
+    "static/media/check-solid.9fa78ef3.svg": "/DeutscheGrammatik/static/media/check-solid.9fa78ef3.svg",
     "static/media/chevron-right-solid.635eaa06.svg": "/DeutscheGrammatik/static/media/chevron-right-solid.635eaa06.svg",
     "static/media/finger.027e5ccf.svg": "/DeutscheGrammatik/static/media/finger.027e5ccf.svg",
     "static/media/play.f44c9dc5.svg": "/DeutscheGrammatik/static/media/play.f44c9dc5.svg",
@@ -36,12 +39,12 @@
     "static/media/satz7.mp3": "/DeutscheGrammatik/static/media/satz7.a863432d.mp3",
     "static/media/satz8.mp3": "/DeutscheGrammatik/static/media/satz8.53251478.mp3",
     "static/media/satz9.mp3": "/DeutscheGrammatik/static/media/satz9.8deec868.mp3",
-    "static/media/wrong.ea7c95d7.svg": "/DeutscheGrammatik/static/media/wrong.ea7c95d7.svg"
+    "static/media/wrong.a83fe540.svg": "/DeutscheGrammatik/static/media/wrong.a83fe540.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.d20d72d7.js",
-    "static/js/2.670bef7c.chunk.js",
-    "static/css/main.01a25d02.chunk.css",
-    "static/js/main.85c4bcfd.chunk.js"
+    "static/js/2.31f5cb31.chunk.js",
+    "static/css/main.cc763864.chunk.css",
+    "static/js/main.35959d58.chunk.js"
   ]
 }
