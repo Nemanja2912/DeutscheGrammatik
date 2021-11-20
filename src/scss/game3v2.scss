@@ -19,8 +19,8 @@ $GRAY_COLOR: #dddddd;
 }
 
 .line3 {
-  position: relative;
-  left: -59.5px !important;
+  // position: relative;
+  margin-left: 140.5px !important;
 }
 
 .game3v2 {
@@ -74,4 +74,20 @@ $GRAY_COLOR: #dddddd;
 
 .transition {
   transition: all 0.2s ease 0s !important;
+}
+
+.circle {
+  content: "";
+  border-radius: 50%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #5ac9f5ab;
+  z-index: -1;
+  position: absolute;
+}
+
+.opacity {
+  opacity: 0;
 }
