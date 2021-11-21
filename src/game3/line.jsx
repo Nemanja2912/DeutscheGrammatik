@@ -1,285 +1,596 @@
-import React, { useState, useRef, useEffect, createRef } from "react";
+import React, { createRef, useEffect, useRef, useState, useMemo } from "react";
+import "../css/game3v2.css";
 
-let counter = 0;
+const Line = ({
+  list,
+  index,
+  leftWord,
+  centerWord,
+  rightWord1,
+  rightWord2 = false,
+  nounIndex,
+  answerResult,
+  setAnswer,
+  result,
+  answerPos,
+  resultArr,
+  helpRef,
+  setFingerPos,
+  wrongPos1,
+  wrongPos2,
+}) => {
+  const reciArr = useMemo(() => {
+    const refs = [];
+    list.forEach((item, index) => {
+      refs[index] = createRef(null);
+    });
 
-const Line = ({ list, index, nounIndex }) => {
-  const [pos, setPos] = useState([0, 0]);
+    return refs;
+  }, [list]);
 
-  const wordObj = [];
+  // let reciArr = {};
+  // for (let i = 0; i < list.length; i++) {
+  //   reciArr[i] = createRef();
+  // }
 
-  for (let i = 0; i < list.length; i++) {
-    wordObj[i] = {
-      left: 0,
-      top: 0,
-      ref: createRef(),
-      key: i,
-      coordX: 0,
-      side: i === 0 ? "left" : i === 1 ? "center" : "right",
-    };
-  }
+  let centerRef = useRef();
+  let circleRef = useRef();
+
+  const [reciArrValues, setReciArrValues] = useState([]);
+  const pos = [];
+  let prihvatamoPos = true;
+  let pomerajStari;
+  const setPos = (e) => {
+    if (!prihvatamoPos) return;
+    pos[0] = e.clientX;
+    pos[1] = e.clientY;
+  };
 
   useEffect(() => {
-    setTimeout(() => {
-      const wordObj = [...word];
-
-      for (let i = 0; i < list.length; i++) {
-        wordObj[i].coordXStart =
-          word[i].ref.current.getBoundingClientRect().left;
-        wordObj[i].coordXEnd =
-          word[i].ref.current.getBoundingClientRect().right;
-        wordObj[i].width = word[i].ref.current.getBoundingClientRect().width;
+    if (result) {
+      for (let i = 0; i < reciArr.length; i++) {
+        reciArr[i].current.classList.remove("cursor");
       }
+      return;
+    }
+  });
 
-      console.log("Finished!");
-      updateWord([...wordObj]);
-    }, 200);
+  useEffect(() => {
+    initValues();
+
+    let leftPos = centerRef.current.getBoundingClientRect().left;
+
+    let centerPos = {
+      left: centerRef.current.getBoundingClientRect().left - 15,
+      right:
+        window.innerWidth -
+        centerRef.current.getBoundingClientRect().right -
+        15,
+      top: centerRef.current.getBoundingClientRect().top - 40,
+      bottom:
+        window.innerHeight -
+        centerRef.current.getBoundingClientRect().bottom -
+        40,
+    };
+
+    circleRef.current.style.left = centerPos.left + "px";
+    circleRef.current.style.right = centerPos.right + "px";
+    circleRef.current.style.top = centerPos.top + "px";
+    circleRef.current.style.bottom = centerPos.bottom + "px";
+
+    if (reciArr[nounIndex].current.getBoundingClientRect().left < leftPos) {
+      circleRef.current.style.left =
+        reciArr[nounIndex].current.getBoundingClientRect().left - 15 + "px";
+    } else {
+      circleRef.current.style.right =
+        window.innerWidth -
+        reciArr[nounIndex].current.getBoundingClientRect().right -
+        15 +
+        "px";
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [word, updateWord] = useState(wordObj);
+  const handleMove = (i) => {
+    console.log(reciArrValues);
+    if (result) return;
+    const posXLeft = reciArr[i].current.getBoundingClientRect().left;
+    const posXRight = reciArr[i].current.getBoundingClientRect().right;
+    const posYTop = reciArr[i].current.getBoundingClientRect().top;
+    const posYBottom = reciArr[i].current.getBoundingClientRect().bottom;
 
-  const handleMove = (index) => {
-    const wordObj = [...word];
+    // reciArr[i].current.classList.remove("transition");
+    reciArr[i].current.style.transition = "0s";
 
-    wordObj.sort((x, y) => x.coordX - y.coordX);
-
-    let initX = wordObj[index].left;
-    let initY = wordObj[index].top;
-
-    const elementIndex = wordObj.findIndex((word) => index === word.key);
-    let initCoordX = wordObj[elementIndex].coordXStart;
-
-    let clientX;
-
-    let isMove = false;
-
+    if (i === nounIndex) {
+      circleRef.current.classList.remove("opacity");
+    }
+    const initLeft = reciArrValues[i].leftRelative;
+    let didMove = false;
+    prihvatamoPos = false;
     const move = (e) => {
-      counter += 1;
+      reciArr[i].current.style.zIndex = "10000000";
 
-      console.log(counter);
-
-      const elementIndex = wordObj.findIndex((word) => index === word.key);
-      wordObj[elementIndex].left = e.clientX - pos[0] + initX;
-      wordObj[elementIndex].top = e.clientY - pos[1] + initY;
-
-      wordObj[elementIndex].ref.current.style.zIndex = "100000";
-
-      let targetElementIndex = wordObj.findIndex(
-        (word) =>
-          clientX > word.coordXStart + 0 &&
-          clientX < word.coordXEnd - 0 &&
-          index !== word.key &&
-          word.key !== 1
-      );
-
-      if (
-        targetElementIndex !== -1 &&
-        elementIndex !== 1 &&
-        !(
-          elementIndex === nounIndex &&
-          wordObj[elementIndex].side === wordObj[targetElementIndex].side
-        ) &&
-        !(
-          targetElementIndex === nounIndex &&
-          wordObj[elementIndex].side === wordObj[targetElementIndex].side
-        ) &&
-        // !(targetElementIndex === nounIndex && elementIndex === 3) &&
-        !isMove
-      ) {
-        isMove = true;
-
-        let tempCoordStart = wordObj[targetElementIndex].coordXStart;
-        let tempCoordEnd = wordObj[targetElementIndex].coordXEnd;
-        let tempSide = wordObj[targetElementIndex].side;
-
-        wordObj[targetElementIndex].ref.current.style.transition = "0.2s";
-
-        setTimeout(() => {
-          wordObj[targetElementIndex].ref.current.style.transition = "0s";
-        }, 200);
-
-        const leftToRight = () => {
-          // ElementTarget
-          wordObj[targetElementIndex].left =
-            wordObj[elementIndex].coordXStart -
-            wordObj[targetElementIndex].coordXStart +
-            wordObj[targetElementIndex].left;
-
-          wordObj[targetElementIndex].coordXStart =
-            wordObj[elementIndex].coordXStart;
-
-          wordObj[targetElementIndex].coordXEnd =
-            wordObj[elementIndex].coordXStart +
-            wordObj[targetElementIndex].width;
-
-          // ElementMove
-
-          wordObj[elementIndex].coordXStart =
-            tempCoordEnd - wordObj[elementIndex].width;
-          wordObj[elementIndex].coordXEnd = tempCoordEnd;
-        };
-
-        const rightToLeft = () => {
-          // ElementTarget
-          wordObj[targetElementIndex].left =
-            wordObj[elementIndex].coordXEnd -
-            wordObj[targetElementIndex].width -
-            wordObj[targetElementIndex].coordXStart +
-            wordObj[targetElementIndex].left;
-
-          wordObj[targetElementIndex].coordXStart =
-            wordObj[elementIndex].coordXEnd - wordObj[targetElementIndex].width;
-
-          wordObj[targetElementIndex].coordXEnd =
-            wordObj[elementIndex].coordXEnd;
-
-          // ElementMove
-
-          wordObj[elementIndex].coordXStart = tempCoordStart;
-          wordObj[elementIndex].coordXEnd =
-            tempCoordStart + wordObj[elementIndex].width;
-        };
-
-        if (
-          e.clientX > wordObj[elementIndex].coordXStart &&
-          wordObj[elementIndex].side === wordObj[targetElementIndex].side
-        ) {
-          leftToRight();
-        } else if (
-          e.clientX < wordObj[elementIndex].coordXStart &&
-          wordObj[elementIndex].side === wordObj[targetElementIndex].side
-        ) {
-          rightToLeft();
-        } else if (
-          e.clientX > wordObj[elementIndex].coordXStart &&
-          wordObj[elementIndex].side !== wordObj[targetElementIndex].side
-        ) {
-          for (let i = 0; i < list.length; i++) {
-            if (
-              wordObj[i].side === "right" &&
-              i !== targetElementIndex &&
-              i !== nounIndex
-            ) {
-              wordObj[i].ref.current.style.transition = "0.2s";
-              wordObj[i].left =
-                wordObj[elementIndex].width -
-                wordObj[targetElementIndex].width +
-                wordObj[i].left;
-
-              setTimeout(() => {
-                wordObj[i].coordXStart =
-                  wordObj[i].ref.current.getBoundingClientRect().left;
-
-                wordObj[i].coordXEnd =
-                  wordObj[i].ref.current.getBoundingClientRect().right;
-
-                wordObj[i].ref.current.style.transition = "0s";
-              }, 200);
-            }
-          }
-
-          rightToLeft();
-        } else {
-          for (let i = 0; i < list.length; i++) {
-            if (
-              wordObj[i].side === "right" &&
-              i !== targetElementIndex &&
-              i !== elementIndex &&
-              i !== nounIndex
-            ) {
-              wordObj[i].left =
-                wordObj[targetElementIndex].width -
-                wordObj[elementIndex].width +
-                wordObj[i].left;
-
-              wordObj[i].ref.current.style.transition = "0.2s";
-
-              setTimeout(() => {
-                wordObj[i].coordXStart =
-                  wordObj[i].ref.current.getBoundingClientRect().left;
-
-                wordObj[i].coordXEnd =
-                  wordObj[i].ref.current.getBoundingClientRect().right;
-
-                wordObj[i].ref.current.style.transition = "0s";
-              }, 200);
-            }
-          }
-
-          leftToRight();
-        }
-
-        wordObj[targetElementIndex].side = wordObj[elementIndex].side;
-        wordObj[elementIndex].side = tempSide;
-
-        setTimeout(() => {
-          isMove = false;
-        }, 1000);
+      if (i === 1) {
+        reciArr[i].current.style.left = initLeft + e.clientX - pos[0] + "px";
+        reciArr[i].current.style.top = e.clientY - pos[1] + "px";
+        return;
       }
 
-      clientX = e.clientX;
+      if (i === nounIndex) {
+        if (
+          e.clientX - (pos[0] - posXLeft) <
+            centerRef.current.getBoundingClientRect().left -
+              reciArr[i].current.getBoundingClientRect().width -
+              50 ||
+          e.clientX - (pos[0] - posXRight) >
+            centerRef.current.getBoundingClientRect().right +
+              reciArr[i].current.getBoundingClientRect().width +
+              50 ||
+          e.clientY - (pos[1] - posYTop) <
+            centerRef.current.getBoundingClientRect().top - 50 ||
+          e.clientY - (pos[1] - posYBottom) >
+            centerRef.current.getBoundingClientRect().bottom + 50
+        ) {
+          moveEnd();
+          return;
+        }
 
-      updateWord([...wordObj]);
+        if (
+          reciArr[i].current.getBoundingClientRect().left <
+          centerRef.current.getBoundingClientRect().left
+        ) {
+          circleRef.current.style.left =
+            reciArr[nounIndex].current.getBoundingClientRect().left - 15 + "px";
+        }
+
+        if (
+          reciArr[i].current.getBoundingClientRect().right >
+          centerRef.current.getBoundingClientRect().right
+        ) {
+          circleRef.current.style.right =
+            window.innerWidth -
+            reciArr[nounIndex].current.getBoundingClientRect().right -
+            15 +
+            "px";
+        }
+
+        if (
+          reciArr[i].current.getBoundingClientRect().top <
+          centerRef.current.getBoundingClientRect().top
+        ) {
+          circleRef.current.style.top =
+            reciArr[nounIndex].current.getBoundingClientRect().top - 40 + "px";
+        }
+
+        if (
+          reciArr[i].current.getBoundingClientRect().bottom >
+          centerRef.current.getBoundingClientRect().bottom
+        ) {
+          circleRef.current.style.bottom =
+            window.innerHeight -
+            reciArr[nounIndex].current.getBoundingClientRect().bottom -
+            40 +
+            "px";
+        }
+      }
+
+      reciArr[i].current.style.left = initLeft + e.clientX - pos[0] + "px";
+      reciArr[i].current.style.top = e.clientY - pos[1] + "px";
+      const indexNovi = reciArrValues.findIndex((el) => {
+        return e.clientX > el.left && e.clientX < el.right;
+      });
+      const stari = reciArrValues.find((item) => item.id === i);
+      const novi = reciArrValues[indexNovi];
+      if (!novi) return;
+      if (stari.imenica) {
+        if (novi.dynamicID > 2) return;
+      }
+      if (novi.imenica) {
+        if (stari.dynamicID > 2) return;
+      }
+      if (indexNovi === -1 || indexNovi === 1) return;
+      if (
+        (!didMove && stari.dynamicID !== novi.dynamicID) ||
+        stari.dynamicID !== novi.dynamicID
+      ) {
+        didMove = true;
+      } else {
+        return;
+      }
+      if (stari.dynamicID === novi.dynamicID) return;
+      const overCenter = novi.dynamicID < 1 || stari.dynamicID < 1;
+      const saDesne = !overCenter;
+      if (saDesne) {
+        if (stari.dynamicID < novi.dynamicID) {
+          pomerajStari = 0;
+          let pomerajNovi = 0;
+          if (stari.width < novi.width) {
+            if (stari.dynamicID + 1 === novi.dynamicID) {
+              pomerajNovi -= stari.width;
+              pomerajStari += novi.width;
+            } else
+              for (let j = stari.dynamicID; j < novi.dynamicID + 1; j++) {
+                if (j < novi.dynamicID) pomerajNovi -= reciArrValues[i].width;
+                if (j !== stari.dynamicID && j < novi.dynamicID + 1)
+                  pomerajStari += reciArrValues[j].width;
+              }
+            reciArr[novi.id].current.style.left =
+              reciArrValues[novi.id].leftRelative + pomerajNovi + "px";
+          } else {
+            if (stari.dynamicID + 1 === novi.dynamicID) {
+              pomerajNovi -= stari.width;
+              pomerajStari += novi.width;
+            } else
+              for (let j = stari.dynamicID; j < novi.dynamicID + 1; j++) {
+                if (j < novi.dynamicID) pomerajNovi -= reciArrValues[i].width;
+                if (j !== stari.dynamicID && j < novi.dynamicID + 1)
+                  pomerajStari += reciArrValues[j].width;
+              }
+            reciArr[novi.id].current.style.left =
+              reciArrValues[novi.id].leftRelative + pomerajNovi + "px";
+          }
+          calcValue(stari.id, novi.dynamicID, pomerajStari, pomerajStari);
+          calcValue(novi.id, stari.dynamicID, true, pomerajNovi);
+        } else {
+          let pomerajNovi = 0;
+          pomerajStari = 0;
+          pomerajNovi += stari.width;
+          pomerajStari -= novi.width;
+          reciArr[novi.id].current.style.left =
+            reciArrValues[novi.id].leftRelative + pomerajNovi + "px";
+          calcValue(stari.id, novi.dynamicID, pomerajStari, pomerajStari);
+          calcValue(novi.id, stari.dynamicID, true, pomerajNovi);
+        }
+      } else {
+        if (
+          (novi.dynamicID === 0 || novi.dynamicID === reciArr.length - 1) &&
+          (stari.dynamicID === 0 || stari.dynamicID === reciArr.length - 1)
+        ) {
+          const noviStrana = novi.dynamicID > stari.dynamicID ? "r" : "l";
+          const centarWidth = reciArrValues[1].width;
+          let pomerajNovi = 0;
+          let rec;
+
+          if (noviStrana === "r") {
+            pomerajNovi += -novi.width - centarWidth;
+            rec = reciArrValues.find((t) => t.dynamicID === 2);
+            pomerajNovi -= reciArr.length > 3 ? rec.width : 0;
+          } else {
+            pomerajNovi -= -novi.width - centarWidth;
+
+            rec = reciArrValues.find((t) => t.dynamicID === 2);
+            pomerajNovi += reciArr.length > 3 ? rec.width : 0;
+          }
+          pomerajStari = 0;
+          if (noviStrana === "r") {
+            pomerajStari -= -stari.width - centarWidth;
+
+            rec = reciArrValues.find((t) => t.dynamicID === 2);
+            pomerajStari += reciArr.length > 3 ? rec.width : 0;
+          } else {
+            pomerajStari += -stari.width - centarWidth;
+            rec = reciArrValues.find((t) => t.dynamicID === 2);
+            pomerajStari -= reciArr.length > 3 ? rec.width : 0;
+          }
+          reciArr[novi.id].current.style.left =
+            reciArrValues[novi.id].leftRelative + pomerajNovi + "px";
+
+          calcValue(stari.id, novi.dynamicID, pomerajStari, pomerajStari);
+          calcValue(novi.id, stari.dynamicID, true, pomerajNovi);
+        } else {
+          const noviStrana = novi.dynamicID > stari.dynamicID ? "r" : "l";
+          const centarWidth = reciArrValues[1].width;
+          const pomerajNovi =
+            noviStrana === "r"
+              ? -novi.width - centarWidth
+              : novi.width + centarWidth;
+          pomerajStari =
+            noviStrana === "r"
+              ? stari.width + centarWidth
+              : -stari.width - centarWidth;
+          reciArr[novi.id].current.style.left =
+            reciArrValues[novi.id].leftRelative + pomerajNovi + "px";
+
+          const sirinaRazlika =
+            noviStrana === "r"
+              ? stari.width - novi.width
+              : novi.width - stari.width;
+
+          calcValue(stari.id, novi.dynamicID, pomerajStari, pomerajStari);
+          calcValue(novi.id, stari.dynamicID, true, pomerajNovi);
+          for (let i = 3; i < reciArr.length; i++) {
+            let j = i;
+            j = reciArrValues.findIndex((item) => item.dynamicID === j);
+            reciArr[j].current.style.left =
+              parseFloat(reciArr[j].current.style.left) + sirinaRazlika + "px";
+            calcValue(
+              reciArrValues[j].id,
+              reciArrValues[j].dynamicID,
+              true,
+              sirinaRazlika
+            );
+          }
+        }
+      }
     };
-
     const moveEnd = () => {
+      circleRef.current.classList.add("opacity");
+
+      let centerPos = {
+        left: centerRef.current.getBoundingClientRect().left - 15,
+        right:
+          window.innerWidth -
+          centerRef.current.getBoundingClientRect().right -
+          15,
+        top: centerRef.current.getBoundingClientRect().top - 40,
+        bottom:
+          window.innerHeight -
+          centerRef.current.getBoundingClientRect().bottom -
+          40,
+      };
+
+      circleRef.current.style.left = centerPos.left + "px";
+      circleRef.current.style.right = centerPos.right + "px";
+      circleRef.current.style.top = centerPos.top + "px";
+      circleRef.current.style.bottom = centerPos.bottom + "px";
+
+      if (i === 1) {
+        // reciArr[i].current.classList.add("transition");
+        reciArr[i].current.style.transition = "0.2s";
+
+        reciArr[1].current.style.left = 0 + "px";
+        reciArr[1].current.style.top = 0 + "px";
+
+        document.removeEventListener("mousemove", move);
+        document.removeEventListener("mouseup", moveEnd);
+
+        prihvatamoPos = true;
+        return;
+      }
       document.removeEventListener("mousemove", move);
+      // calcValue(i, reciArrValues[i].dynamicID, true, 0, true);
+      // reciArr[i].current.classList.add("transition");
+      reciArr[i].current.style.transition = "0.2s";
 
-      const elementIndex = wordObj.findIndex((word) => index === word.key);
-
-      wordObj[elementIndex].left =
-        wordObj[elementIndex].coordXStart - initCoordX + initX;
-      wordObj[elementIndex].top = 0;
-
-      wordObj[elementIndex].ref.current.style.zIndex = "0";
-      wordObj[elementIndex].ref.current.style.transition = "0.2s";
+      reciArr[i].current.style.zIndex = "1";
+      if (!didMove) reciArr[i].current.style.left = initLeft + "px";
+      else reciArr[i].current.style.left = reciArrValues[i].leftRelative + "px";
+      didMove = false;
+      reciArr[i].current.style.top = "0px";
+      document.removeEventListener("mouseup", moveEnd);
+      prihvatamoPos = true;
 
       setTimeout(() => {
-        wordObj[elementIndex].ref.current.style.transition = "0s";
-      }, 200);
+        if (
+          reciArr[nounIndex].current.getBoundingClientRect().left <
+          centerPos.left + 15
+        ) {
+          circleRef.current.style.left =
+            reciArr[nounIndex].current.getBoundingClientRect().left - 15 + "px";
+        } else {
+          circleRef.current.style.right =
+            window.innerWidth -
+            reciArr[nounIndex].current.getBoundingClientRect().right -
+            15 +
+            "px";
+        }
+      }, 300);
 
-      updateWord([...wordObj]);
+      let answer = false;
 
-      document.removeEventListener("mouseup", moveEnd);
+      for (let i = 0; i < reciArrValues.length; i++) {
+        if (reciArrValues[i].dynamicID === answerResult[i]) {
+          answer = true;
+        } else {
+          answer = false;
+          break;
+        }
+      }
+
+      if (answer) setAnswer(true);
+      else setAnswer(false);
     };
-
     document.addEventListener("mousemove", move);
-
     document.addEventListener("mouseup", moveEnd);
   };
 
+  function initValues() {
+    for (let i = 0; i < reciArr.length; i++) {
+      const id = i;
+      let side;
+      if (i === 0) side = "left";
+      else if (i === 1) side = "center";
+      else side = "right";
+      const boundingRect = reciArr[i].current.getBoundingClientRect();
+      const left = boundingRect.left;
+      const right = boundingRect.right;
+      const width = boundingRect.width;
+      const obj = {
+        id,
+        side,
+        left,
+        right,
+        width,
+        leftRelative: parseFloat(reciArr[i].current.style.left),
+        imenica: i === nounIndex,
+        allowListedIDS: i === 0 ? [2] : [],
+        dynamicID: id,
+      };
+      reciArrValues[i] = obj;
+      setReciArrValues(reciArrValues);
+    }
+  }
+  function calcValue(
+    id,
+    dynamicID,
+    shouldUpdateRelative = true,
+    pomeraj = false,
+    isZadnjiPoziv = false
+  ) {
+    let i = id;
+    let side;
+    if (dynamicID === 0) side = "left";
+    if (dynamicID === 1) side = "center";
+    else side = "right";
+    const boundingRect = reciArr[i].current.getBoundingClientRect();
+    const left = pomeraj ? reciArrValues[i].left + pomeraj : boundingRect.left;
+    const right = pomeraj
+      ? reciArrValues[i].right + pomeraj
+      : boundingRect.right;
+
+    const width = boundingRect.width;
+    const obj = {
+      id,
+      side,
+      left,
+      right,
+      width,
+      leftRelative: isZadnjiPoziv
+        ? reciArrValues[i].leftRelative
+        : pomeraj
+        ? parseFloat(reciArrValues[i].leftRelative) + pomeraj
+        : shouldUpdateRelative === true
+        ? parseFloat(reciArr[i].current.style.left)
+        : reciArrValues[i].leftRelative + shouldUpdateRelative,
+      imenica: reciArrValues[i].imenica,
+      allowListedIDS: reciArrValues[i].allowListedIDS,
+      dynamicID: dynamicID,
+    };
+    reciArrValues[i] = obj;
+  }
+
+  const handleHelp = () => {
+    let fingerMove = true;
+    for (let i = 0; i < reciArrValues.length; i++) {
+      reciArr[i].current.style.transition = "1s";
+
+      setTimeout(() => {
+        reciArr[i].current.style.transition = ".2s";
+      }, 1200);
+
+      if (reciArrValues[i].dynamicID !== answerResult[i] && fingerMove) {
+        setFingerPos([
+          reciArr[i].current.getBoundingClientRect().left +
+            +reciArr[i].current.getBoundingClientRect().width / 2,
+          reciArr[i].current.getBoundingClientRect().top +
+            reciArr[i].current.getBoundingClientRect().height / 2,
+        ]);
+
+        setTimeout(() => {
+          reciArr[i].current.children[0].children[0].style.backgroundColor =
+            "#dddddd";
+        }, 750);
+
+        setTimeout(() => {
+          setFingerPos([
+            reciArr[i].current.getBoundingClientRect().left +
+              +reciArr[i].current.getBoundingClientRect().width / 2 +
+              (answerPos[i] - parseFloat(reciArr[i].current.style.left)),
+            reciArr[i].current.getBoundingClientRect().top +
+              reciArr[i].current.getBoundingClientRect().height / 2,
+          ]);
+
+          setTimeout(() => {
+            reciArr[i].current.children[0].children[0].style.backgroundColor =
+              "transparent";
+          }, 1000);
+        }, 1000);
+
+        fingerMove = false;
+      }
+
+      setTimeout(() => {
+        reciArr[i].current.style.left = answerPos[i] + "px";
+
+        setTimeout(() => {
+          const kojiTrebaBudeTu = resultArr[i];
+          calcValue(kojiTrebaBudeTu, i, true);
+          setAnswer(true);
+        }, 1000);
+      }, 1000);
+    }
+
+    // setFingerPos()
+  };
+
+  useEffect(() => {
+    if (wrongPos1) {
+      reciArr[nounIndex].current.children[0].children[0].style.backgroundColor =
+        "#EB6400";
+    } else {
+      reciArr[nounIndex].current.children[0].children[0].style.backgroundColor =
+        "transparent";
+    }
+
+    if (wrongPos2) {
+      reciArr[
+        resultArr[2]
+      ].current.children[0].children[0].style.backgroundColor = "#EB6400";
+    } else {
+      reciArr[
+        resultArr[2]
+      ].current.children[0].children[0].style.backgroundColor = "transparent";
+    }
+  }, [wrongPos1, wrongPos2]);
+
   return (
-    <div className={`line ${"line" + index}`}>
-      {list.map((item, index) => {
-        return (
-          <>
-            {index === 1 ? (
-              <div className="center">
-                <div
-                  className="verb"
-                  onMouseMove={(e) => setPos([e.clientX, e.clientY])}
-                  onMouseDown={() => handleMove(index)}
-                  style={{ left: word[index].left, top: word[index].top }}
-                  ref={word[index].ref}
-                  wordKey={word[index].key}
-                >
-                  {item}
-                </div>
-              </div>
-            ) : (
-              <div
-                className={`word`}
-                onMouseMove={(e) => setPos([e.clientX, e.clientY])}
-                onMouseDown={() => handleMove(index)}
-                style={{ left: word[index].left, top: word[index].top }}
-                ref={word[index].ref}
-                wordKey={word[index].key}
-              >
-                {item}
-              </div>
-            )}
-          </>
-        );
-      })}
+    <div className={`container ${"line" + index}`}>
+      <div id="levo">
+        <div
+          className="word transition cursor"
+          ref={reciArr[0]}
+          style={{ left: 0, top: 0 }}
+          onMouseMove={(e) => setPos(e)}
+          onMouseDown={() => handleMove(0)}
+        >
+          <div className="wrapper">
+            <p>{leftWord}</p>
+          </div>
+        </div>
+      </div>
+      <div id="centar" ref={centerRef}>
+        <div
+          className="word transition cursor"
+          ref={reciArr[1]}
+          style={{ left: 0, top: 0 }}
+          onMouseMove={(e) => setPos(e)}
+          onMouseDown={() => handleMove(1)}
+        >
+          <div className="wrapper">
+            <p>{centerWord}</p>
+          </div>
+        </div>
+      </div>
+      <div id="desno">
+        <div
+          className="word transition cursor"
+          ref={reciArr[2]}
+          style={{ left: 0, top: 0 }}
+          onMouseMove={(e) => setPos(e)}
+          onMouseDown={() => handleMove(2)}
+        >
+          <div className="wrapper">
+            <p>{rightWord1}</p>
+          </div>
+        </div>
+        {rightWord2 && (
+          <div
+            className="word transition cursor"
+            ref={reciArr[3]}
+            style={{ left: 0, top: 0 }}
+            onMouseMove={(e) => setPos(e)}
+            onMouseDown={() => handleMove(3)}
+          >
+            <div className="wrapper">
+              <p>{rightWord2}</p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {<div className="circle opacity" ref={circleRef}></div>}
+      <div className="help-btn" ref={helpRef} onClick={handleHelp}></div>
     </div>
   );
 };

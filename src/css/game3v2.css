@@ -17,12 +17,12 @@
 }
 
 .line3 {
-  margin-left: 140.5px !important;
+  margin-left: 152.1px !important;
 }
 
 .game3v2 {
   height: 100vh;
-  padding-top: 150px;
+  padding-top: 125px;
 }
 
 .container {
@@ -57,9 +57,9 @@
 
 .word {
   position: relative;
-  cursor: pointer;
   transition: all 0s ease 0s;
-  font-size: 25px;
+  font-size: 20px;
+  transition: 0.2s;
 }
 
 .word p {
@@ -68,12 +68,12 @@
   padding: 2px;
 }
 
-.word p:hover {
-  background-color: #dddddd;
+.cursor {
+  cursor: pointer;
 }
 
-.transition {
-  transition: all 0.2s ease 0s !important;
+.cursor p:hover {
+  background-color: #dddddd !important;
 }
 
 .circle {
@@ -90,5 +90,99 @@
 
 .opacity {
   opacity: 0;
+}
+
+.regel2 .options {
+  justify-content: center;
+}
+
+.regel {
+  background-color: #788287;
+  width: max-content;
+  font-size: 20px;
+  padding: 25px 25px 50px 25px;
+  margin: auto;
+  margin-top: 115px;
+  border-radius: 10px;
+}
+
+.regel .title {
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 25px;
+}
+
+.regel .sentence {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.regel .sentence .blank {
+  background-color: #fff;
+  width: 125px;
+  font-size: 20px;
+  margin: 0 15px;
+  padding: 5px 15px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.regel .options {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.regel .options .opt {
+  width: 125px;
+  text-align: center;
+  background-color: #a0c814;
+  color: #fff;
+  padding: 5px 15px;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+}
+
+.help-btn {
+  position: absolute;
+  left: -500px;
+}
+
+.regelOpacity {
+  transition: 0.5s;
+  opacity: 0;
+}
+
+.wrong1 {
+  position: absolute;
+  top: 280px;
+  padding: 10px;
+  line-height: 20px;
+  color: #dddddd;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 5px;
+  left: 200px;
+  width: 150px;
+  background-color: #eb6400;
+  font-size: 14px;
+}
+
+.wrong1:after {
+  position: absolute;
+  content: "";
+  background-color: #eb6400;
+  height: 20px;
+  width: 20px;
+  top: -10px;
+  transform: rotate(45deg);
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.wrong2 {
+  left: 420px;
 }
 /*# sourceMappingURL=game3v2.css.map */
