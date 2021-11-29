@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/DeutscheGrammatik/static/css/main.51620a01.chunk.css",
-    "main.js": "/DeutscheGrammatik/static/js/main.919944e1.chunk.js",
-    "main.js.map": "/DeutscheGrammatik/static/js/main.919944e1.chunk.js.map",
+    "main.css": "/DeutscheGrammatik/static/css/main.9a626a4f.chunk.css",
+    "main.js": "/DeutscheGrammatik/static/js/main.ed732862.chunk.js",
+    "main.js.map": "/DeutscheGrammatik/static/js/main.ed732862.chunk.js.map",
     "runtime-main.js": "/DeutscheGrammatik/static/js/runtime-main.d20d72d7.js",
     "runtime-main.js.map": "/DeutscheGrammatik/static/js/runtime-main.d20d72d7.js.map",
-    "static/js/2.feda583a.chunk.js": "/DeutscheGrammatik/static/js/2.feda583a.chunk.js",
-    "static/js/2.feda583a.chunk.js.map": "/DeutscheGrammatik/static/js/2.feda583a.chunk.js.map",
+    "static/js/2.31f5cb31.chunk.js": "/DeutscheGrammatik/static/js/2.31f5cb31.chunk.js",
+    "static/js/2.31f5cb31.chunk.js.map": "/DeutscheGrammatik/static/js/2.31f5cb31.chunk.js.map",
     "index.html": "/DeutscheGrammatik/index.html",
-    "static/css/main.51620a01.chunk.css.map": "/DeutscheGrammatik/static/css/main.51620a01.chunk.css.map",
-    "static/js/2.feda583a.chunk.js.LICENSE.txt": "/DeutscheGrammatik/static/js/2.feda583a.chunk.js.LICENSE.txt",
+    "static/css/main.9a626a4f.chunk.css.map": "/DeutscheGrammatik/static/css/main.9a626a4f.chunk.css.map",
+    "static/js/2.31f5cb31.chunk.js.LICENSE.txt": "/DeutscheGrammatik/static/js/2.31f5cb31.chunk.js.LICENSE.txt",
     "static/media/1.1f5c7ad5.jpg": "/DeutscheGrammatik/static/media/1.1f5c7ad5.jpg",
     "static/media/1.jpg": "/DeutscheGrammatik/static/media/1.d9e6505f.jpg",
     "static/media/10.jpg": "/DeutscheGrammatik/static/media/10.bc938655.jpg",
@@ -43,8 +43,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.d20d72d7.js",
-    "static/js/2.feda583a.chunk.js",
-    "static/css/main.51620a01.chunk.css",
-    "static/js/main.919944e1.chunk.js"
+    "static/js/2.31f5cb31.chunk.js",
+    "static/css/main.9a626a4f.chunk.css",
+    "static/js/main.ed732862.chunk.js"
   ]
 }
