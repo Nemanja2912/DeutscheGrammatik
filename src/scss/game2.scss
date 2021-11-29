@@ -64,7 +64,32 @@ $GRAY_COLOR: #dddddd;
     }
   }
 
-  .line1 {
-    // top: 50px;
+  .button {
+    font-size: 25px;
+    background-color: $BACKGROUND_COLOR;
+    color: #7d878c;
+    width: max-content;
+    font-weight: 700;
+    margin: auto;
+    margin-top: 25px;
+    padding: 20px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    animation-name: buttonShow;
+    animation-duration: 1s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
+    transition: 0.5s;
+
+    position: absolute;
+    bottom: 25px;
+    left: 0;
+    right: 0;
+
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+    }
   }
 }

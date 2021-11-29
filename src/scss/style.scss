@@ -78,25 +78,33 @@ $GRAY_COLOR: #788287;
   .info {
     position: absolute;
     top: 25px;
-    right: 5vw;
+    right: 2.5vw;
     color: $BACKGROUND_COLOR;
     font-weight: 700;
     font-size: 20px;
-    transition: 1s;
     line-height: 26px;
+    text-align: right;
+
+    img {
+      transition: 1s;
+      width: 100%;
+    }
   }
 
   .info-small {
     font-size: 12px;
     top: 25px;
-    right: 15px;
     line-height: 18px;
+
+    img {
+      width: 60%;
+    }
   }
 
   .bottom {
     position: absolute;
     bottom: 25px;
-    right: 5vw;
+    right: 2.5vw;
     text-align: right;
     transition: 0.5s;
     transition-delay: 0.2s;
@@ -268,6 +276,10 @@ $GRAY_COLOR: #788287;
   height: 225px;
 }
 
+.full-menu {
+  height: 100%;
+}
+
 .arrow {
   img {
     width: 30px;
@@ -360,4 +372,44 @@ $GRAY_COLOR: #788287;
 
 .titles-full {
   height: 150px;
+}
+
+.credits {
+  background-color: $BACKGROUND_COLOR;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  transition: 0.5s;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 10000000;
+
+  padding: 25px 25px 5vw 5vw;
+
+  font-size: 20px;
+  line-height: 32px;
+
+  .close {
+    img {
+      position: absolute;
+      right: 5vw;
+      width: 30px;
+      height: 30px;
+      padding: 7.5px;
+      border-radius: 50%;
+      background-color: $GRAY_COLOR;
+      transition: 0.5s;
+      cursor: pointer;
+
+      &:hover {
+        transform: rotate(90deg) scale(1.1);
+      }
+    }
+  }
+}
+
+.credits-opacity {
+  opacity: 1;
+  pointer-events: inherit;
 }

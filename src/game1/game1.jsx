@@ -8,7 +8,7 @@ import Info from "../component/info";
 
 let myTimeout;
 
-const Game1 = () => {
+const Game1 = ({ nextLesson }) => {
   const [level, setLevel] = useState(0);
   const [correct, setCorrect] = useState(false);
   const [error, setError] = useState(false);
@@ -20,6 +20,7 @@ const Game1 = () => {
   const [fingerPos, setFingerPos] = useState([100, window.innerWidth - 100]);
   const [fingerHide, setFingerHide] = useState(false);
   const [fingerShow, setFingerShow] = useState(false);
+  const [buttonAnimation, setButtonAnimation] = useState(false);
 
   let imageList = [];
 
@@ -903,6 +904,14 @@ const Game1 = () => {
           />
         )}
       </div>
+      {level >= 10 && (
+        <div
+          onClick={nextLesson}
+          className={`button ${buttonAnimation ? "buttonHidden" : ""}`}
+        >
+          WEITER
+        </div>
+      )}
     </div>
   );
 };

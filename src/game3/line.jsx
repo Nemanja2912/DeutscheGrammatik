@@ -1,5 +1,4 @@
 import React, { createRef, useEffect, useRef, useState, useMemo } from "react";
-import "../css/game3v2.css";
 
 const Line = ({
   list,
@@ -18,6 +17,7 @@ const Line = ({
   setFingerPos,
   wrongPos1,
   wrongPos2,
+  setInteraction,
 }) => {
   const reciArr = useMemo(() => {
     const refs = [];
@@ -92,7 +92,6 @@ const Line = ({
   }, []);
 
   const handleMove = (i) => {
-    console.log(reciArrValues);
     if (result) return;
     const posXLeft = reciArr[i].current.getBoundingClientRect().left;
     const posXRight = reciArr[i].current.getBoundingClientRect().right;
@@ -116,6 +115,32 @@ const Line = ({
         reciArr[i].current.style.top = e.clientY - pos[1] + "px";
         return;
       }
+
+      // Here \/
+      // if (
+      //   reciArr[i].current.getBoundingClientRect().left <
+      //   centerRef.current.getBoundingClientRect().left
+      // ) {
+      //   reciArr[i].current.style.textTransform = "capitalize";
+      // } else if (i !== nounIndex) {
+      //   reciArr[i].current.style.textTransform = "lowercase";
+      // }
+
+      if (reciArrValues[i].dynamicID === answerPos.length - 1) {
+        for (let j = 0; j < answerPos.length; j++) {
+          reciArr[j].current.classList.remove("wrapper-dot");
+        }
+        reciArr[i].current.classList.add("wrapper-dot");
+      } else {
+        for (let j = 0; j < answerPos.length; j++) {
+          if (reciArrValues[j].dynamicID === answerPos.length - 1) {
+            reciArr[j].current.classList.add("wrapper-dot");
+          }
+        }
+        reciArr[i].current.classList.remove("wrapper-dot");
+      }
+
+      //
 
       if (i === nounIndex) {
         if (
@@ -378,6 +403,7 @@ const Line = ({
       }, 300);
 
       let answer = false;
+      let interaction = false;
 
       for (let i = 0; i < reciArrValues.length; i++) {
         if (reciArrValues[i].dynamicID === answerResult[i]) {
@@ -388,8 +414,16 @@ const Line = ({
         }
       }
 
+      for (let i = 0; i < reciArrValues.length; i++) {
+        if (reciArrValues[i].leftRelative !== 0) {
+          interaction = true;
+        }
+      }
+
       if (answer) setAnswer(true);
       else setAnswer(false);
+
+      if (interaction) setInteraction(true);
     };
     document.addEventListener("mousemove", move);
     document.addEventListener("mouseup", moveEnd);
@@ -507,6 +541,23 @@ const Line = ({
           const kojiTrebaBudeTu = resultArr[i];
           calcValue(kojiTrebaBudeTu, i, true);
           setAnswer(true);
+
+          // Here
+          if (reciArrValues[i].dynamicID === answerPos.length - 1) {
+            console.log(reciArr[i].current);
+            for (let j = 0; j < answerPos.length; j++) {
+              reciArr[j].current.classList.remove("wrapper-dot");
+            }
+            reciArr[i].current.classList.add("wrapper-dot");
+          } else {
+            for (let j = 0; j < answerPos.length; j++) {
+              if (reciArrValues[j].dynamicID === answerPos.length - 1) {
+                reciArr[j].current.classList.add("wrapper-dot");
+              }
+            }
+            reciArr[i].current.classList.remove("wrapper-dot");
+          }
+          //
         }, 1000);
       }, 1000);
     }
@@ -545,7 +596,10 @@ const Line = ({
           onMouseDown={() => handleMove(0)}
         >
           <div className="wrapper">
-            <p>{leftWord}</p>
+            <p>
+              {leftWord}
+              <span className="dot">.</span>
+            </p>
           </div>
         </div>
       </div>
@@ -564,26 +618,34 @@ const Line = ({
       </div>
       <div id="desno">
         <div
-          className="word transition cursor"
+          className={`word transition cursor ${
+            answerPos.length - 1 === 2 ? "wrapper-dot" : ""
+          }`}
           ref={reciArr[2]}
           style={{ left: 0, top: 0 }}
           onMouseMove={(e) => setPos(e)}
           onMouseDown={() => handleMove(2)}
         >
           <div className="wrapper">
-            <p>{rightWord1}</p>
+            <p>
+              {rightWord1}
+              <span className="dot">.</span>
+            </p>
           </div>
         </div>
         {rightWord2 && (
           <div
-            className="word transition cursor"
+            className="word transition cursor  wrapper-dot"
             ref={reciArr[3]}
             style={{ left: 0, top: 0 }}
             onMouseMove={(e) => setPos(e)}
             onMouseDown={() => handleMove(3)}
           >
             <div className="wrapper">
-              <p>{rightWord2}</p>
+              <p>
+                {rightWord2}
+                <span className="dot">.</span>
+              </p>
             </div>
           </div>
         )}

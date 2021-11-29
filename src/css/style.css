@@ -73,25 +73,33 @@
 .menu .info {
   position: absolute;
   top: 25px;
-  right: 5vw;
+  right: 2.5vw;
   color: #fff;
   font-weight: 700;
   font-size: 20px;
-  transition: 1s;
   line-height: 26px;
+  text-align: right;
+}
+
+.menu .info img {
+  transition: 1s;
+  width: 100%;
 }
 
 .menu .info-small {
   font-size: 12px;
   top: 25px;
-  right: 15px;
   line-height: 18px;
+}
+
+.menu .info-small img {
+  width: 60%;
 }
 
 .menu .bottom {
   position: absolute;
   bottom: 25px;
-  right: 5vw;
+  right: 2.5vw;
   text-align: right;
   transition: 0.5s;
   transition-delay: 0.2s;
@@ -253,6 +261,10 @@
   height: 225px;
 }
 
+.full-menu {
+  height: 100%;
+}
+
 .arrow img {
   width: 30px;
   left: 0;
@@ -337,5 +349,41 @@
 
 .titles-full {
   height: 150px;
+}
+
+.credits {
+  background-color: #fff;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  transition: 0.5s;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 10000000;
+  padding: 25px 25px 5vw 5vw;
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.credits .close img {
+  position: absolute;
+  right: 5vw;
+  width: 30px;
+  height: 30px;
+  padding: 7.5px;
+  border-radius: 50%;
+  background-color: #788287;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.credits .close img:hover {
+  transform: rotate(90deg) scale(1.1);
+}
+
+.credits-opacity {
+  opacity: 1;
+  pointer-events: inherit;
 }
 /*# sourceMappingURL=style.css.map */

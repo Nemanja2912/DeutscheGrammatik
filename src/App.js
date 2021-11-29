@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createRef, useRef } from "react";
 import "./css/general.css";
 import Game1 from "./game1/game1";
 import Game2 from "./game2/game2";
@@ -10,6 +10,13 @@ import Menu from "./menu/menu";
 function App() {
   const [navMenuItem, setNavMenuItem] = useState(0);
   const [load, setLoad] = useState(false);
+  const menuRef = useRef(null);
+
+  const navButtonRef = [];
+
+  for (let i = 0; i < 5; i++) {
+    navButtonRef[i] = createRef();
+  }
 
   setTimeout(() => {
     setLoad(true);
@@ -26,11 +33,60 @@ function App() {
   return (
     <div className="App">
       {!load && <p>Ucitavanje fonta...</p>}
-      <Menu navMenuItem={navMenuItem} setNavMenuItem={setNavMenuItem} />
-      {navMenuItem === 0 ? <Game1 /> : ""}
-      {navMenuItem === 1 ? <Game2 /> : ""}
-      {navMenuItem === 2 ? <Game3 /> : ""}
-      {navMenuItem === 3 ? <Game4 /> : ""}
+      <Menu
+        navMenuItem={navMenuItem}
+        setNavMenuItem={setNavMenuItem}
+        navButtonRef={navButtonRef}
+        menuRef={menuRef}
+      />
+      {navMenuItem === 0 ? (
+        <Game1
+          nextLesson={() => {
+            menuRef.current.click();
+            setTimeout(() => {
+              navButtonRef[1].current.click();
+            }, 0);
+          }}
+        />
+      ) : (
+        ""
+      )}
+      {navMenuItem === 1 ? (
+        <Game2
+          nextLesson={() => {
+            menuRef.current.click();
+            setTimeout(() => {
+              navButtonRef[2].current.click();
+            }, 0);
+          }}
+        />
+      ) : (
+        ""
+      )}
+      {navMenuItem === 2 ? (
+        <Game3
+          nextLesson={() => {
+            menuRef.current.click();
+            setTimeout(() => {
+              navButtonRef[3].current.click();
+            }, 0);
+          }}
+        />
+      ) : (
+        ""
+      )}
+      {navMenuItem === 3 ? (
+        <Game4
+          nextLesson={() => {
+            menuRef.current.click();
+            setTimeout(() => {
+              navButtonRef[4].current.click();
+            }, 0);
+          }}
+        />
+      ) : (
+        ""
+      )}
       {navMenuItem === 4 ? <Game5 /> : ""}
     </div>
   );

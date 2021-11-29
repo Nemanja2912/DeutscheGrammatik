@@ -1,61 +1,220 @@
-.game3 {
+* {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  /* Safari */
+  /* Konqueror HTML */
+  /* Old versions of Firefox */
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+#centar {
+  background: #5ac8f5;
+  width: 150px;
+  text-align: center;
+}
+
+.line3 {
+  margin-left: 158px !important;
+}
+
+.game3v2 {
   height: 100vh;
-  padding-top: 150px;
-  margin-left: 200px;
-  width: 1000px;
+  padding-top: 125px;
 }
 
-.game3 .line {
+.game3v2 .button {
+  font-size: 25px;
+  background-color: #fff;
+  color: #7d878c;
+  width: max-content;
+  font-weight: 700;
+  margin: auto;
+  margin-top: 25px;
+  padding: 20px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  animation-name: buttonShow;
+  animation-duration: 1s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-delay: 1s;
+  transition: 0.5s;
+}
+
+.game3v2 .button:hover {
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+}
+
+.container {
+  width: 100%;
   display: flex;
-  gap: 15px;
-  position: relative;
   align-items: center;
+  margin-left: 200px;
 }
 
-.game3 .line1 .center {
+#levo,
+#desno {
+  display: flex;
+  /*gap: 0.5em;*/
+}
+
+.wrapper .dot {
+  opacity: 0;
+}
+
+.wrapper-dot .dot {
+  opacity: 1;
+}
+
+#desno > div > .wrapper,
+#levo > div > .wrapper {
+  padding: 0 5px;
+}
+
+#centar .word {
+  padding: 10px;
+}
+
+.line1 > #centar {
   border-radius: 10px 10px 0 0;
 }
 
-.game3 .line3 .center {
+.line3 > #centar {
   border-radius: 0 0 10px 10px;
 }
 
-.game3 .line3 {
-  left: -60px;
-}
-
-.game3 .word {
-  font-size: 25px;
+.word {
   position: relative;
-  height: max-content;
-  cursor: pointer;
-  padding: 0 5px;
+  transition: all 0s ease 0s;
+  font-size: 20px;
+  transition: 0.2s;
+}
+
+.word p {
+  transition: 0.5s;
   border-radius: 5px;
+  padding: 2px;
 }
 
-.game3 .word:hover {
-  background-color: #dddddd;
+.cursor {
+  cursor: pointer;
 }
 
-.game3 .center {
-  background-color: #5ac8f5;
-  width: 150px;
-  display: flex;
-  padding: 10px 0;
+.cursor p:hover {
+  background-color: #dddddd !important;
+}
+
+.circle {
+  content: "";
+  border-radius: 50%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #5ac9f5ab;
+  z-index: -1;
+  position: absolute;
+}
+
+.opacity {
+  opacity: 0;
+}
+
+.regel2 .options {
   justify-content: center;
 }
 
-.game3 .verb {
-  font-size: 25px;
-  position: relative;
-  height: max-content;
-  cursor: pointer;
-  padding: 0 5px;
-  border-radius: 5px;
+.regel {
+  background-color: #788287;
   width: max-content;
+  font-size: 20px;
+  padding: 25px 25px 50px 25px;
+  margin: auto;
+  margin-top: 50px;
+  border-radius: 10px;
 }
 
-.game3 .verb:hover {
-  background-color: #dddddd;
+.regel .title {
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 25px;
+}
+
+.regel .sentence {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.regel .sentence .blank {
+  background-color: #fff;
+  width: 125px;
+  font-size: 20px;
+  margin: 0 15px;
+  padding: 5px 15px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.regel .options {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.regel .options .opt {
+  width: 125px;
+  text-align: center;
+  background-color: #a0c814;
+  color: #fff;
+  padding: 5px 15px;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+}
+
+.help-btn {
+  position: absolute;
+  left: -500px;
+}
+
+.regelOpacity {
+  transition: 0.5s;
+  opacity: 0;
+}
+
+.wrong1 {
+  position: absolute;
+  top: 280px;
+  padding: 10px;
+  line-height: 20px;
+  color: #dddddd;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 5px;
+  left: 200px;
+  width: 150px;
+  background-color: #eb6400;
+  font-size: 14px;
+}
+
+.wrong1:after {
+  position: absolute;
+  content: "";
+  background-color: #eb6400;
+  height: 20px;
+  width: 20px;
+  top: -10px;
+  transform: rotate(45deg);
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.wrong2 {
+  left: 420px;
 }
 /*# sourceMappingURL=game3.css.map */

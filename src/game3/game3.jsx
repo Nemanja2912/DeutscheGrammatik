@@ -1,5 +1,5 @@
 import React, { createRef, useState, useRef, useEffect } from "react";
-import "../css/game3v2.css";
+import "../css/game3.css";
 import Line from "./line";
 import Info from "../component/info";
 import Finger from "../assets/img/finger.svg";
@@ -7,12 +7,12 @@ import Regel from "./regel";
 import Regel2 from "./regel2";
 
 const lists = [
-  ["Michaela", "repariert", "das Auto."],
-  ["Michaela", "geht", "in die Bibliothek.", "nach dem Seminar"],
-  ["in einem Café.", "sitzen", "Sie", "am Abend"],
+  ["Michaela", "repariert", "das Auto"],
+  ["Michaela", "geht", "in die Bibliothek", "nach dem Seminar"],
+  ["in einem Café", "sitzen", "Sie", "am Abend"],
 ];
 
-const Game3 = () => {
+const Game3 = ({ nextLesson }) => {
   const [infoDesc, setInfoDesc] = useState(
     <>
       <p>Verschiebe die Satzteile.</p>
@@ -31,6 +31,7 @@ const Game3 = () => {
   const [wrongPos2, setWrongPos2] = useState(false);
 
   const [answer, setAnswer] = useState([true, false, false]);
+  const [interaction, setInteraction] = useState([false, false, false]);
   const answerResult = [
     [0, 1, 2],
     [0, 1, 3, 2],
@@ -45,8 +46,8 @@ const Game3 = () => {
 
   const answerPos = [
     [0, 0, 0],
-    [0, 0, 182.25, -161.5],
-    [397.513, 0, -190.45, -40.45],
+    [0, 0, 188.038, -161.512],
+    [403.3, 0, -196.237, -46.2375],
   ];
 
   const [result, setResult] = useState(false);
@@ -64,6 +65,20 @@ const Game3 = () => {
       setInfo(true);
     }
   }, [answer]);
+
+  useEffect(() => {
+    let result = true;
+    for (let i = 0; i < interaction.length; i++) {
+      if (!interaction[i]) result = false;
+    }
+
+    if (result) {
+      setInfoDesc("Lies die Sätze und formuliere die Regel.");
+
+      setResult(true);
+      setInfo(true);
+    }
+  }, [interaction]);
 
   const handleHelp = () => {
     setFingerShow(true);
@@ -139,6 +154,14 @@ const Game3 = () => {
             answerPos={answerPos[index]}
             helpRef={helpRef[index]}
             setFingerPos={setFingerPos}
+            setInteraction={(par) =>
+              setInteraction((prev) => {
+                console.log(par);
+                let answ = [...prev];
+                answ[index] = par;
+                return answ;
+              })
+            }
             setAnswer={(par) =>
               setAnswer((prev) => {
                 let answ = [...prev];
@@ -168,6 +191,12 @@ const Game3 = () => {
             setWrongPos1={setWrongPos1}
             setWrongPos2={setWrongPos2}
           />
+        )}
+
+        {regel >= 2 && (
+          <div onClick={nextLesson} className={`button`}>
+            WEITER
+          </div>
         )}
       </div>
     </>

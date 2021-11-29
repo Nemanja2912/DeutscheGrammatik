@@ -4,6 +4,7 @@ import Info from "../component/info";
 import "../css/game5.css";
 import Line1 from "./line1";
 import Finger from "../assets/img/finger.svg";
+import Ende from "./../component/ende";
 
 const lines = [
   {
@@ -57,6 +58,7 @@ const Game5 = () => {
   const [fingerPos, setFingerPos] = useState([window.innerWidth - 100, 100]);
   const [fingerHide, setFingerHide] = useState(false);
   const [fingerShow, setFingerShow] = useState(false);
+  const [ende, setEnde] = useState(false);
 
   const verbRefs = [];
   const helpRefs = [];
@@ -93,6 +95,7 @@ const Game5 = () => {
   return (
     <>
       {info && <Info desc="Ergänze die Sätze." setInfo={setInfo} />}
+      {ende && <Ende setEnde={setEnde} />}
       <div className="help-overlay" style={{ opacity: fingerShow ? 1 : 0 }}>
         {!fingerHide && (
           <img
@@ -152,6 +155,16 @@ const Game5 = () => {
         </div>
         <Indicator indicator={indicator} wrong={false} />
         <Indicator indicator={wrong} wrong={true} />
+        {step >= 9 && (
+          <div
+            className={`button`}
+            onClick={() => {
+              setEnde(true);
+            }}
+          >
+            ENDE
+          </div>
+        )}
       </div>
     </>
   );

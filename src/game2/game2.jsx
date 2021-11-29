@@ -36,7 +36,7 @@ for (let sentence of texts) {
   index++;
 }
 
-const Game2 = () => {
+const Game2 = ({ nextLesson }) => {
   const [activeHelp, setActiveHelp] = useState(false);
   const [indicator, setIndicator] = useState(false);
   const [wrong, setWrong] = useState(false);
@@ -47,6 +47,7 @@ const Game2 = () => {
   const dropBoxRef = useRef(null);
   const lineRef = useRef([]);
   const verbRef = useRef([]);
+  const [lessonBtn, setLessonBtn] = useState(false);
 
   const [fingerPos, setFingerPos] = useState([100, window.innerWidth - 100]);
   const [fingerHide, setFingerHide] = useState(false);
@@ -65,6 +66,7 @@ const Game2 = () => {
 
   const handleMove = (num) => {
     if (num > 10) return;
+
     let cursorY;
     let cursorX;
 
@@ -117,6 +119,7 @@ const Game2 = () => {
 
         if (num === 9) {
           setStep(9);
+          setLessonBtn(true);
         } else {
           setStep(num + 1);
         }
@@ -286,6 +289,11 @@ const Game2 = () => {
           ))}
         </div>
         <Indicator indicator={indicator} wrong={wrong} />
+        {lessonBtn && (
+          <div onClick={nextLesson} className={`button`}>
+            WEITER
+          </div>
+        )}
       </div>
     </>
   );

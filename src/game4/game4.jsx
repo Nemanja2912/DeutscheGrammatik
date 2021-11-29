@@ -3,12 +3,14 @@ import Group1 from "./group1";
 import Group2 from "./group2";
 import Group3 from "./group3";
 
-const Game4 = () => {
+const Game4 = ({ nextLesson }) => {
   const [buttonAnimation, setButtonAnimation] = useState(true);
   const [movePos, setMovePos] = useState(0);
 
   const increaseMovePos = () => {
     setMovePos((prev) => prev + 1);
+
+    if (movePos === 2) nextLesson();
 
     setButtonAnimation(true);
   };

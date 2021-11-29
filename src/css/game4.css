@@ -76,7 +76,7 @@
   gap: 15px;
 }
 
-.game4 .line,
+.game4 .line .word,
 .game4 .verb {
   font-size: 25px;
 }

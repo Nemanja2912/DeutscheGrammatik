@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Screen2 = ({ movePos, changePos, item, changeItem }) => {
+const Screen2 = ({ movePos, changePos, item, changeItem, navButtonRef }) => {
   const [opacity, setOpacity] = useState(true);
   const [display, setDisplay] = useState(true);
 
@@ -65,6 +65,7 @@ const Screen2 = ({ movePos, changePos, item, changeItem }) => {
                       : `translateY(-${100 * item}%)`,
                 }}
                 onClick={() => {
+                  console.log("test");
                   if (item === 1) return;
                   setDisplay(false);
                   changePos(1);
@@ -73,6 +74,7 @@ const Screen2 = ({ movePos, changePos, item, changeItem }) => {
                     changeItem(1);
                   }, 1000);
                 }}
+                ref={navButtonRef[1]}
               >
                 2. POSITION DES VERBS FINDEN
               </div>
@@ -96,6 +98,7 @@ const Screen2 = ({ movePos, changePos, item, changeItem }) => {
                     changeItem(2);
                   }, 1000);
                 }}
+                ref={navButtonRef[2]}
               >
                 3. REGEL FORMULIEREN
               </div>
@@ -119,6 +122,7 @@ const Screen2 = ({ movePos, changePos, item, changeItem }) => {
                     changeItem(3);
                   }, 1000);
                 }}
+                ref={navButtonRef[3]}
               >
                 4. Übung 1
               </div>
@@ -142,6 +146,7 @@ const Screen2 = ({ movePos, changePos, item, changeItem }) => {
                     changeItem(4);
                   }, 1000);
                 }}
+                ref={navButtonRef[4]}
               >
                 5. Übung 2
               </div>
