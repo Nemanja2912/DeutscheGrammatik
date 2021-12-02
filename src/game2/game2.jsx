@@ -196,6 +196,7 @@ const Game2 = ({ nextLesson }) => {
 
         if (step === 9) {
           setStep(9);
+          setLessonBtn(true);
         } else {
           setStep((prev) => prev + 1);
         }

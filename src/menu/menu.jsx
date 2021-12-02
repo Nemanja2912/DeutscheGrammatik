@@ -81,7 +81,16 @@ const Menu = ({ navMenuItem, setNavMenuItem, navButtonRef, menuRef }) => {
         >
           Credits
         </p>
-        <p>Impressum</p>
+        <p>
+          <a
+            href="https://www.goethe.de/de/imp.html"
+            target="_blank"
+            rel="noreferrer"
+            style={{ color: "inherit", textDecoration: "none" }}
+          >
+            Impressum
+          </a>
+        </p>
       </div>
       <div className="arrow" ref={menuRef} onClick={handleOpenMenu}>
         <img

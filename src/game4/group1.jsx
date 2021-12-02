@@ -20,8 +20,12 @@ const Group1 = ({ endSession }) => {
   const [fingerShow, setFingerShow] = useState(false);
   const verbRef = useRef();
   const helpRef = useRef();
+  const [disable, setDisable] = useState(false);
 
   const handleHelp = () => {
+    if (disable || lineShow === 3) return;
+    setDisable(true);
+
     setFingerShow(true);
 
     setFingerPos([
@@ -36,6 +40,10 @@ const Group1 = ({ endSession }) => {
       setFingerHide(true);
       setFingerShow(false);
       setFingerPos([window.innerWidth - 100, 100]);
+
+      setTimeout(() => {
+        setDisable(false);
+      }, 1500);
 
       setTimeout(() => {
         setFingerHide(false);
